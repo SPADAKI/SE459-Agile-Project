@@ -45,7 +45,7 @@ public class PlayerInterface {
 
 	public static void main(String[] args) {
 		
-		new PlayerInterface();
+		//new PlayerInterface();
 
 	}
 
