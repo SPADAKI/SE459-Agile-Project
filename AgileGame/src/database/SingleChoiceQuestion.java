@@ -24,7 +24,9 @@ public class SingleChoiceQuestion implements IQuestion {
 	}
 
 	public String getOption(Option opt) {
-		return options[opt.getVal()];
+		int idx = opt.getVal();
+		if(idx < options.length) return options[opt.getVal()];
+		else return "";
 	}
 
 	public Option getAnswer() {

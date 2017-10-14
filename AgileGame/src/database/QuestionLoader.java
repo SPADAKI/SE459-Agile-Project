@@ -40,10 +40,10 @@ public class QuestionLoader {
 	                    int qid = parseInt(eleQue.getAttribute("Id"));
 	                    String text = eleQue.getElementsByTagName("Text").item(0).getTextContent();
 	                    int ans = parseInt(eleQue.getElementsByTagName("Answer").item(0).getTextContent());
-	                    String[] opts = new String[4];
 	                    NodeList optionsList = eleQue.getElementsByTagName("Option");
+	                    String[] opts = new String[optionsList.getLength()];
 	                    for(int j = 0; j < optionsList.getLength(); j++) {
-	                    	Element eleOpt = (Element) optionsList.item(i);
+	                    	Element eleOpt = (Element) optionsList.item(j);
 	                    	int optIdx = parseInt(eleOpt.getAttribute("Idx"));
 	                    	opts[optIdx] = eleOpt.getTextContent();
 	                    }
