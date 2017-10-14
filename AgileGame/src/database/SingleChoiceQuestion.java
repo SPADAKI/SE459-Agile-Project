@@ -32,4 +32,12 @@ public class SingleChoiceQuestion implements IQuestion {
 	public Option getAnswer() {
 		return answer;
 	}
+
+	public void dumpQuestion() {
+		System.out.println("Question "+idx+": "+question);
+		for(int i = 0; i < options.length; i++) {
+			System.out.println("  "+Option.fromInt(i)+". "+options[i]);
+		}
+		System.out.println("Answer: "+answer);
+	}
 }

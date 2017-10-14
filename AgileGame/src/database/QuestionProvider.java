@@ -23,8 +23,7 @@ public class QuestionProvider {
 		if(questions != null) {
 			Random rnd = ThreadLocalRandom.current();
 			for(int i = 0; i < questions.size() && num > 0; i++) {
-				int rn = rnd.nextInt(i + 1);
-				rn /= questions.size();
+				int rn = rnd.nextInt(questions.size()-i);
 				if(rn < num) {
 					num--;
 					ret.add(questions.get(i));

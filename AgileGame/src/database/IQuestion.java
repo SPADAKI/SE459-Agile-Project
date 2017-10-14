@@ -31,4 +31,6 @@ public interface IQuestion {
 	public String getOption(Option opt);
 
 	public Option getAnswer();
+
+	public void dumpQuestion();
 }
