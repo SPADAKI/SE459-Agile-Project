@@ -234,21 +234,20 @@ Sprint Retrospective?</Text>
 
     <Question Id="28">
 	  	<Text>Which of the following represents the relative size of epics, stories, and tasks from biggest to smallest.</Text>
-			<Option Idx="0"></Option>
-			<Option Idx="1"></Option>
-			<Option Idx="2"></Option>
-			<Option Idx="3"></Option>
-			<Answer></Answer>
+			<Option Idx="0">Epic > Story > Task</Option>
+			<Option Idx="1">Task > Story > Epic</Option>
+			<Option Idx="2">Epics, stories, and tasks can't be compared in this way.</Option>
+			<Option Idx="3">Story > Task > Epic</Option>
+			<Answer>0</Answer>
     </Question>
 
     <Question Id="29">
-	  	<Text></Text>
-			<Option Idx="0">Epic > Story > Task</Option>
-			<Option Idx="1">Task > Story > Epic</Option>
-			<Option Idx="2">	
-Epics, stories, and tasks can't be compared in this way.</Option>
-			<Option Idx="3">Story > Task > Epic</Option>
-			<Answer>0</Answer>
+	  	<Text>Which of the following is NOT benefit of source code management?</Text>
+			<Option Idx="0">Recoverability</Option>
+			<Option Idx="1">History</Option>
+			<Option Idx="2">Concurrency</Option>
+			<Option Idx="3">Decentralization</Option>
+			<Answer>3</Answer>
     </Question>
 
     <Question Id="30">
