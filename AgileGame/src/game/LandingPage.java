@@ -2,6 +2,7 @@ package game;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,61 +11,88 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
-
+import javafx.event.ActionEvent;
 import static java.awt.SystemColor.window;
 
 public class LandingPage extends Application {
 
     private Stage window;
     private Scene main;
-    private int width = 680;
-    private int height = 300;
+    private int width = 1000;
+    private int height = 700;
+    private int numRows = 15;
+    private static int MAX_NAME_LENGTH = 15;
     private static String teamOneName;
     private static String teamTwoName;
-
+    private static int maxPlayers = 6;
+    private static int numPlayerTeamOne;
+    private static int numPlayerTeamTwo;
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         window = primaryStage;
         primaryStage.setTitle("Agile Game Time - Landing Page");
 
+        // Variable initiations
+        numPlayerTeamOne = 0;
+        numPlayerTeamTwo = 0;
 
         // Grid setup
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.getColumnConstraints().add(new ColumnConstraints(150));
-        grid.getColumnConstraints().add(new ColumnConstraints(100));
-        grid.getColumnConstraints().add(new ColumnConstraints(150));
+            // Column setup
+        ColumnConstraints leftContraint = new ColumnConstraints();
+        leftContraint.setPercentWidth(25);
+        ColumnConstraints midConstraint = new ColumnConstraints();
+        midConstraint.setPercentWidth(50);
+        ColumnConstraints rightContraint = new ColumnConstraints();
+        rightContraint.setPercentWidth(25);
+            // Row setup
+        for (int i = 0; i < 10; i++) {
+            RowConstraints row = new RowConstraints(30);
+            grid.getRowConstraints().add(row);
+        }
+        grid.getColumnConstraints().addAll(leftContraint, midConstraint, rightContraint);
 
         // Set vertical and horizontal gap
         grid.setVgap(10);
         grid.setHgap(10);
 
         Label gameTitle = new Label("Team Six Agile Game");
-        GridPane.setConstraints(gameTitle, 2, 0);
+        GridPane.setHalignment(gameTitle, HPos.CENTER);
+        //GridPane.setConstraints(gameTitle, 1, 0);
 
         // Team One Name Input fields
         TextField teamOneNameInput = new TextField();
         teamOneNameInput.setPromptText("Team One Name");
-        GridPane.setConstraints(teamOneNameInput, 0, 1);
-        Button submitTeamOneName = new Button("Submit");
-        GridPane.setConstraints(submitTeamOneName, 0, 2);
+        grid.add(teamOneNameInput, 0, 1);
+        Button submitTeamOneName = new Button("Submit Team Name");
+        grid.add(submitTeamOneName, 0, 2);
+        TextField addPlayerTeamOne = new TextField();
+        grid.add(addPlayerTeamOne, 0, 3);
+        Button submitPlayerTeamOne = new Button("Submit Player Name");
+        grid.add(submitPlayerTeamOne, 0, 4);
 
         // Team Two Name Input fields
         TextField teamTwoNameInput = new TextField();
         teamTwoNameInput.setPromptText("Team Two Name");
-        GridPane.setConstraints(teamTwoNameInput, 8, 1);
-        Button submitTeamTwoName = new Button("Submit");
-        GridPane.setConstraints(submitTeamTwoName, 8, 2);
+        grid.add(teamTwoNameInput, 2, 1);
+        Button submitTeamTwoName = new Button("Submit Team Name");
+        grid.add(submitTeamTwoName, 2, 2);
+        TextField addPlayerTeamTwo = new TextField();
+        grid.add(addPlayerTeamTwo, 2, 3);
+        Button submitPlayerTeamTwo = new Button("Submit Player Name");
+        grid.add(submitPlayerTeamTwo, 2, 4);
 
         // Continue to Add Players Scene
-        Button continueToPlayerCreation = new Button("Next");
-        GridPane.setConstraints(continueToPlayerCreation, 8, 5);
-        continueToPlayerCreation.setDisable(true);
+        Button continueToGame = new Button("Next");
+        GridPane.setConstraints(continueToGame, 8, 5);
+        continueToGame.setDisable(true);
 
         // Add elements to the gridpane
-        grid.getChildren().addAll(gameTitle, teamOneNameInput, submitTeamOneName, teamTwoNameInput, submitTeamTwoName, continueToPlayerCreation);
+        grid.getChildren().addAll(gameTitle);
 
         main = new Scene(grid, width, height);
 
@@ -77,7 +105,7 @@ public class LandingPage extends Application {
                 teamOneName = tempName;
                 AlertBox.display("Success", String.format("Team Name '%s' successfully created.", teamOneName));
                 if (checkTeamNames(teamOneName, teamTwoName))
-                    continueToPlayerCreation.setDisable(false);
+                    continueToGame.setDisable(false);
             }
 
         });
@@ -91,10 +119,33 @@ public class LandingPage extends Application {
                 teamTwoName = tempName;
                 AlertBox.display("Success", String.format("Team Name '%s' successfully created.", teamTwoName));
                 if (checkTeamNames(teamOneName, teamTwoName))
-                    continueToPlayerCreation.setDisable(false);
+                    continueToGame.setDisable(false);
             }
         });
 
+        submitPlayerTeamOne.setOnAction(e -> {
+            String name = addPlayerTeamOne.getText();
+            int x = checkTeamOneName(name);
+            if (x != -1) {
+                grid.add(new Label(name), 0, x + 3);
+                GridPane.setConstraints(addPlayerTeamOne, 0, x + 4);
+                GridPane.setConstraints(submitPlayerTeamOne, 0, x + 5);
+                numPlayerTeamOne += 1;
+            } else
+                AlertBox.display("Error!", "Invalid Name. Try Again.");
+        });
+
+        submitPlayerTeamTwo.setOnAction(e -> {
+            String name = addPlayerTeamTwo.getText();
+            int x = checkTeamTwoName(name);
+            if (x != 0) {
+                grid.add(new Label(name), 2, x + 3);
+                GridPane.setConstraints(addPlayerTeamTwo, 2, x + 4);
+                GridPane.setConstraints(submitPlayerTeamTwo, 2, x + 5);
+                numPlayerTeamTwo += 1;
+            } else
+                AlertBox.display("Error!", "Invalid Name. Try Again.");
+        });
 
         primaryStage.setScene(main);
         primaryStage.show();
@@ -109,10 +160,23 @@ public class LandingPage extends Application {
     }
 
     private boolean checkTeamNames(String one, String two) {
-        if (one == null && two == null)
-            return false;
-        return true;
+        return one != null && two != null;
     }
+
+    // Checks for valid player name
+    private int checkTeamOneName(String name) {
+        if (name != null && name.length() > 0 && name.length() <= MAX_NAME_LENGTH)
+            return numPlayerTeamOne;
+        return -1;
+    }
+
+    // Checks for valid player name
+    private int checkTeamTwoName(String name) {
+        if (name != null && name.length() > 0 && name.length() <= MAX_NAME_LENGTH)
+            return numPlayerTeamTwo;
+        return -1;
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
