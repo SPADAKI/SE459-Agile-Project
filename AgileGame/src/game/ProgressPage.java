@@ -1,47 +1,21 @@
 package game;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-import static java.awt.SystemColor.window;
 
-import java.awt.Font;
+public class ProgressPage extends AGPage {
+	public ProgressPage(AgileGame app, int width, int height) {
+		super(app, width, height);
 
-import com.sun.javafx.geom.Rectangle;
-import com.sun.prism.paint.Color;
-
-public class ProgressPage extends Application {
-
-    private Stage window;
-    private Scene main;
-    private int width = 600;
-    private int height = 600;
-
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        window = primaryStage;
-        primaryStage.setTitle("Agile Game Time - Progress Page");
-
-        // Grid setup
+		// Grid setup
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 30));//top, right, bottom, and left padding
         // Set vertical and horizontal gap
@@ -100,11 +74,8 @@ public class ProgressPage extends Application {
         // Add elements to the grid pane
         grid.getChildren().addAll(pageTitle, question, answerA, answerB, answerC, next, statusText,statusArea);
 
-        main = new Scene(grid, width, height);
-
-        primaryStage.setScene(main);
-        primaryStage.show();
-    }
+        scene = new Scene(grid, width, height);
+	}
 
 //    public HBox addHBox() {
 //
@@ -118,7 +89,4 @@ public class ProgressPage extends Application {
 //
 //        return hbox;
 //    }
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
