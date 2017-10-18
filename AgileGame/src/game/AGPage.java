@@ -17,4 +17,8 @@ public class AGPage {
 	public Scene getScene() {
 		return scene;
 	}
+
+	public void updateSize(int width, int height) {
+
+	}
 }

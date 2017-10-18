@@ -1,13 +1,6 @@
 package game;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class AgileGame extends Application {
@@ -19,6 +12,7 @@ public class AgileGame extends Application {
 	 private int width = 800;
 	 private int height = 600;
 
+	 private AGPage currentPage = null;
 	 private LandingPage lanPage = new LandingPage(this, width, height);
 	 private ProgressPage proPage = new ProgressPage(this, width, height);
 
@@ -27,16 +21,33 @@ public class AgileGame extends Application {
 		 window = primaryStage;
 		 window.setTitle("Agile Game - Group Six");
 
+		 window.widthProperty().addListener((obs, oldVal, newVal) -> {
+			 if(newVal.intValue() != width) {
+				 width = newVal.intValue();
+				 currentPage.updateSize(width, height);
+			 }
+		 });
+		 window.heightProperty().addListener((obs, oldVal, newVal) -> {
+			 if(newVal.intValue() != height) {
+				 height = newVal.intValue();
+				 currentPage.updateSize(width, height);
+			 }
+		 });
+
 		 showLandingPage();
 		 window.show();
 	 }
 
 	 public void showLandingPage() {
-		 window.setScene(lanPage.getScene());
+		 currentPage = lanPage;
+		 currentPage.updateSize(width, height);
+		 window.setScene(currentPage.getScene());
 	 }
 
 	 public void startGame() {
-		 window.setScene(proPage.getScene());
+		 currentPage = proPage;
+		 currentPage.updateSize(width, height);
+		 window.setScene(currentPage.getScene());
 	 }
 
 	 public void showCongratulationPopup() {
