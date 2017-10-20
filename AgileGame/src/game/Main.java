@@ -62,9 +62,13 @@ public class Main extends Application {
         Button continueToPlayerCreation = new Button("Next");
         GridPane.setConstraints(continueToPlayerCreation, 8, 5);
         continueToPlayerCreation.setDisable(true);
+        
+        //Start game button ****
+        Button startGameInterface = new Button("start game");
+        GridPane.setConstraints(startGameInterface,2, 8);
 
         // Add elements to the gridpane
-        grid.getChildren().addAll(gameTitle, teamOneNameInput, submitTeamOneName, teamTwoNameInput, submitTeamTwoName, continueToPlayerCreation);
+        grid.getChildren().addAll(gameTitle, teamOneNameInput, submitTeamOneName, teamTwoNameInput, submitTeamTwoName, continueToPlayerCreation, startGameInterface);
 
         main = new Scene(grid, width, height);
 
@@ -94,6 +98,13 @@ public class Main extends Application {
                     continueToPlayerCreation.setDisable(false);
             }
         });
+        
+        // new page ***
+        startGameInterface.setOnAction(e -> {
+            new ProgressPage();
+            
+        });
+        
 
 
         primaryStage.setScene(main);

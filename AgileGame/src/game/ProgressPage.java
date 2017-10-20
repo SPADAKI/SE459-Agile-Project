@@ -34,6 +34,10 @@ public class ProgressPage extends Application {
     private Scene main;
     private int width = 600;
     private int height = 600;
+    
+    public void ProgressPage() {
+    	
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -104,7 +108,10 @@ public class ProgressPage extends Application {
 
         primaryStage.setScene(main);
         primaryStage.show();
+        
     }
+    
+    
 
 //    public HBox addHBox() {
 //

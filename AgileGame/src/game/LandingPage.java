@@ -90,9 +90,13 @@ public class LandingPage extends Application {
         Button continueToGame = new Button("Next");
         GridPane.setConstraints(continueToGame, 8, 5);
         continueToGame.setDisable(true);
+        
+        //Start game button ****
+        Button startGameInterface = new Button("start game");
+        GridPane.setConstraints(startGameInterface,2, 8);
 
         // Add elements to the gridpane
-        grid.getChildren().addAll(gameTitle);
+        grid.getChildren().addAll(gameTitle,startGameInterface);
 
         main = new Scene(grid, width, height);
 
@@ -145,6 +149,12 @@ public class LandingPage extends Application {
                 numPlayerTeamTwo += 1;
             } else
                 AlertBox.display("Error!", "Invalid Name. Try Again.");
+        });
+        
+        startGameInterface.setOnAction(e -> {
+        	
+        	new ProgressPage();            
+            
         });
 
         primaryStage.setScene(main);
