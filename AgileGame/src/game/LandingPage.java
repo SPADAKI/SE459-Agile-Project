@@ -1,10 +1,7 @@
 package game;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,16 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import static java.awt.SystemColor.window;
 
-public class LandingPage extends Application {
-
-    private Stage window;
-    private Scene main;
-    private int width = 1000;
-    private int height = 700;
+public class LandingPage extends AGPage {
     private int numRows = 15;
     private static int MAX_NAME_LENGTH = 15;
     private static String teamOneName;
@@ -29,13 +18,11 @@ public class LandingPage extends Application {
     private static int maxPlayers = 6;
     private static int numPlayerTeamOne;
     private static int numPlayerTeamTwo;
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        window = primaryStage;
-        primaryStage.setTitle("Agile Game Time - Landing Page");
 
-        // Variable initiations
+    public LandingPage(AgileGame app, int width, int height) {
+    	super(app, width, height);
+
+    	// Variable initiations
         numPlayerTeamOne = 0;
         numPlayerTeamTwo = 0;
 
@@ -88,17 +75,23 @@ public class LandingPage extends Application {
 
         // Continue to Add Players Scene
         Button continueToGame = new Button("Next");
+<<<<<<< HEAD
         GridPane.setConstraints(continueToGame, 8, 5);
         continueToGame.setDisable(true);
         
         //Start game button ****
         Button startGameInterface = new Button("start game");
         GridPane.setConstraints(startGameInterface,2, 8);
+=======
+        //GridPane.setConstraints(continueToGame, 8, 5);
+        //continueToGame.setDisable(true);
+        grid.add(continueToGame, 1, 5);
+>>>>>>> 2e84d08b9c96e116eb4f05f6ba867741dcd747ad
 
         // Add elements to the gridpane
         grid.getChildren().addAll(gameTitle,startGameInterface);
 
-        main = new Scene(grid, width, height);
+        scene = new Scene(grid, width, height);
 
         submitTeamOneName.setOnAction(e -> {
             teamOneName = "";
@@ -157,9 +150,10 @@ public class LandingPage extends Application {
             
         });
 
-        primaryStage.setScene(main);
-        primaryStage.show();
-    }
+        continueToGame.setOnAction( e -> {
+        	application.startGame();
+        });
+	}
 
     // Method doesn't allow null names, or strings below 0, or above 20 in length
     // Future: Should check if team names are the same
@@ -185,9 +179,5 @@ public class LandingPage extends Application {
         if (name != null && name.length() > 0 && name.length() <= MAX_NAME_LENGTH)
             return numPlayerTeamTwo;
         return -1;
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
