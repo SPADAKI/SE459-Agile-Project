@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<Questions>
+    <Question Id="1">
+	  	<Text>Which of the following is example of the kinds of things that can wrong during a typical software development effort?</Text>
+			<Option Idx="0">An enhancement is requested, but the existing codebase is so complex that it makes the implementation of that enhancement infeasible.</Option>
+			<Option Idx="1">Automated testing rapidly identifies defects during the early stages of the development process.</Option>
+			<Option Idx="2">Each time we make a change to our code, there's no risk that we inject new defects that are worse than the original problem.</Option>
+			<Option Idx="3">None of these things are examples of what can go wrong during software development.</Option>
+			<Answer>0</Answer>
+    </Question>
+
+    <Question Id="2">
+	  	<Text>Which of the following best describes the "Cone of Uncertainty?"</Text>
+			<Option Idx="0">A software delivery model that emphasizes iterative and incremental development.</Option>
+			<Option Idx="1">Another name for the Waterfall model.</Option>
+			<Option Idx="2">The closer to the end of the project we are, the easier it is to project exactly when we'll be able to deliver the completed software.</Option>
+			<Option Idx="3">We never know exactly what we're building until later on in a project.</Option>
+			<Answer>2</Answer>
+    </Question>
+
+    <Question Id="3">
+	  	<Text>The Waterfall model is dead.</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>1</Answer>
+    </Question>
+
+		<Question Id="4">
+	  	<Text>Which of the following is not example of Agile frameworks?</Text>
+			<Option Idx="0">Spiral</Option>
+			<Option Idx="1">Scrum</Option>
+			<Option Idx="2">Kanban</Option>
+			<Option Idx="3">eXtreme Programming</Option>
+			<Answer>0</Answer>
+    </Question>
+
+    <Question Id="5">
+	  	<Text>Which of the following is the most appropriate terms of Agile?</Text>
+			<Option Idx="0">Describes how uncertainty in project plans directly relates to the number of unknowns, and hence the risks, in the project.</Option>
+			<Option Idx="1">A software development model built on Waterfall that revisits earlier phases multiple times to incorporate feedback.</Option>
+			<Option Idx="2">Early delivery of business value.</Option>
+			<Option Idx="3">A cost curve that claims that cost increases exponentially the later on in the development lifecycle that a change is required.</Option>
+			<Answer>2</Answer>
+    </Question>
+
+    <Question Id="6">
+	  	<Text>Which of the following is the most appropriate terms of Waterfall Model?</Text>
+			<Option Idx="0">A software development model characterized by gates where work in the next phase doesn't typically begin until the prior phase is complete.</Option>
+			<Option Idx="1">Describes how uncertainty in project plans directly relates to the number of unknowns, and hence the risks, in the project.</Option>
+			<Option Idx="2">Early delivery of business value.</Option>
+			<Option Idx="3">Small additions or changes to a system's capabilities.</Option>
+			<Answer>0</Answer>
+    </Question>
+
+    <Question Id="7">
+	  	<Text>Which of the following is the most appropriate terms of Cone of Uncertainty?</Text>
+			<Option Idx="0">	
+A cost curve that claims that cost increases exponentially the later on in the development lifecycle that a change is required.</Option>
+			<Option Idx="1">Small additions or changes to a system's capabilities.</Option>
+			<Option Idx="2">Repeated cycles during which a system is changed incrementally.</Option>
+			<Option Idx="3">Describes how uncertainty in project plans directly relates to the number of unknowns, and hence the risks, in the project.</Option>
+			<Answer>3</Answer>
+    </Question>
+
+    <Question Id="8">
+	  	<Text>Which of the following is the most appropriate terms of 	
+Spiral Model?</Text>
+			<Option Idx="0">Traditionally time, cost, and quality were variable while scope was immutable.</Option>
+			<Option Idx="1">Repeated cycles during which a system is changed incrementally.</Option>
+			<Option Idx="2">A software development model built on Waterfall that revisits earlier phases multiple times to incorporate feedback.</Option>
+			<Option Idx="3">A cost curve that claims that cost increases exponentially the later on in the development lifecycle that a change is required.</Option>
+			<Answer>2</Answer>
+    </Question>
+
+    <Question Id="9">
+	  	<Text>Agile approaches like Scrum, XP, and Kanban are methodologies and should be followed exactly as designed if you want to realize any of their benefits.</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>1</Answer>
+    </Question>
+
+    <Question Id="10">
+	  	<Text>Which of the following IS NOT an agile principle?</Text>
+			<Option Idx="0">	
+Business people and developers must work together daily throughout the project.</Option>
+			<Option Idx="1">Welcome changing requirements, even late in development.</Option>
+			<Option Idx="2">The most efficient and effective method of conveying information to and within a development team is through electronic means such as email and shared wiki pages. </Option>
+			<Option Idx="3">The highest priority is to satisfy customers through early and continuous delivery of valuable software.</Option>
+			<Answer>2</Answer>
+    </Question>
+
+    <Question Id="11">
+	  	<Text>According to Takeuchi and Nonaka, which of the following is trait of companies that are successful at process re-engineering?</Text>
+			<Option Idx="0">Sprint retrospective</Option>
+			<Option Idx="1">Daily scrums</Option>
+			<Option Idx="2">Product reviews</Option>
+			<Option Idx="3">Built-in instability</Option>
+			<Answer>3</Answer>
+    </Question>
+
+    <Question Id="12">
+	  	<Text>Each sprint should result in a potentially shippable product.</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>0</Answer>
+    </Question>
+
+    <Question Id="13">
+	  	<Text>The product backlog is the prioritized list of requirements for the sprint.</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>1</Answer>
+    </Question>
+
+    <Question Id="14">
+	  	<Text>In Scrum, developers volunteer to complete tasks within a sprint and it's up to the ScrumMaster to make sure that no one gets overloaded.</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>0</Answer>
+    </Question>
+
+    <Question Id="15">
+	  	<Text>The product owner can change the sprint backlog at any time, even in the middle of the sprint.</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>1</Answer>
+    </Question>
+
+    <Question Id="16">
+	  	<Text>Which of the following is the most appropriate terms of 	
+Daily Scrum?</Text>
+			<Option Idx="0">Answers the questions: what have you done since yesterday, what will you do today, do you have any obstacles?</Option>
+			<Option Idx="1">	
+Answers the questions: what went well and what could be improved.</Option>
+			<Option Idx="2">Answers the questions: what has your team done since we last met, what will your team do before we next meet, is there anything slowing your team down, and are you about to slow another team down?</Option>
+			<Option Idx="3">Demonstrate the work that was completed and discuss the work that was planned but not completed.</Option>
+			<Answer>0</Answer>
+    </Question>
+
+    <Question Id="17">
+	  	<Text>Which of the following is the most appropriate terms of 	
+Backlog Grooming?</Text>
+			<Option Idx="0">Answers the questions: what went well and what could be improved.</Option>
+			<Option Idx="1">Includes activities like refining acceptance criteria, and splitting or merging stories.</Option>
+			<Option Idx="2">Answers the questions: what went well and what could be improved.</Option>
+			<Option Idx="3">Answers the questions: what has your team done since we last met, what will your team do before we next meet, is there anything slowing your team down, and are you about to slow another team down?</Option>
+			<Answer>1</Answer>
+    </Question>
+
+    <Question Id="18">
+	  	<Text>Which of the following is the most appropriate terms of 	
+Sprint Retrospective?</Text>
+			<Option Idx="0">Answers the questions: what have you done since yesterday, what will you do today, do you have any obstacles?</Option>
+			<Option Idx="1">Answers the questions: what has your team done since we last met, what will your team do before we next meet, is there anything slowing your team down, and are you about to slow another team down?</Option>
+			<Option Idx="2">Answers the questions: what went well and what could be improved.</Option>
+			<Option Idx="3">Activities include defining the sprint goal, selecting stories from the product backlog, estimating those stories, and communicating how much work the team thinks can be completed during the sprint.</Option>
+			<Answer>2</Answer>
+    </Question>
+
+    <Question Id="19">
+	  	<Text>Story points are just the scrum word for "hours."</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>1</Answer>
+    </Question>
+
+    <Question Id="20">
+	  	<Text>The number of story points delivered during a sprint is called "velocity."</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>0</Answer>
+    </Question>
+
+
+    <Question Id="21">
+	  	<Text>Which of the following is NOT necessary to complete a release plan?</Text>
+			<Option Idx="0">The release date.</Option>
+			<Option Idx="1">The team's sprint budget.</Option>
+			<Option Idx="2">The estimates for each story in the roadmap.</Option>
+			<Option Idx="3">The stories in the roadmap.</Option>
+			<Answer>0</Answer>
+    </Question>
+
+    <Question Id="22">
+	  	<Text>A burndown chart can be used to show team progress for a sprint, for a release, and for the product delivery as a whole.</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>0</Answer>
+    </Question>
+
+    <Question Id="23">
+	  	<Text>Which of the following is NOT element of a user story.</Text>
+			<Option Idx="0">Detailed UX instructions that describe how the story will be implemented.</Option>
+			<Option Idx="1">A written description of the of the story.</Option>
+			<Option Idx="2">Should be written on some medium that is easy to move around. Things like post-it notes, index cards, or some electronic equivalent.</Option>
+			<Option Idx="3">Acceptance tests that can be used to verify that the story has been successfully completed.</Option>
+			<Answer>0</Answer>
+    </Question>
+
+    <Question Id="24">
+	  	<Text>Stories that are not independent can often be made more independent by combining it with other stories, or by splitting it in a different way.</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>0</Answer>
+    </Question>
+
+    <Question Id="25">
+	  	<Text>Once a story has been written, it should be immutable. After all, you and the users have agreed that it represents what needs to be done.</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>1</Answer>
+    </Question>
+
+    <Question Id="26">
+	  	<Text>If a story isn't valuable to the user, then it isn't a good story.</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>1</Answer>
+    </Question>
+
+    <Question Id="27">
+	  	<Text>The ability to estimate a story isn't important. After all, a requirement is a requirement. If you have to deliver it, an estimate doesn't matter.</Text>
+			<Option Idx="0">True</Option>
+			<Option Idx="1">False</Option>
+			<Answer>1</Answer>
+    </Question>
+
+    <Question Id="28">
+	  	<Text>Which of the following represents the relative size of epics, stories, and tasks from biggest to smallest.</Text>
+			<Option Idx="0">Epic > Story > Task</Option>
+			<Option Idx="1">Task > Story > Epic</Option>
+			<Option Idx="2">Epics, stories, and tasks can't be compared in this way.</Option>
+			<Option Idx="3">Story > Task > Epic</Option>
+			<Answer>0</Answer>
+    </Question>
+
+    <Question Id="29">
+	  	<Text>Which of the following is NOT benefit of source code management?</Text>
+			<Option Idx="0">Recoverability</Option>
+			<Option Idx="1">History</Option>
+			<Option Idx="2">Concurrency</Option>
+			<Option Idx="3">Decentralization</Option>
+			<Answer>3</Answer>
+    </Question>
+
+    <Question Id="30">
+	  	<Text>What is the relationship between epics, stories, tasks, and iterations?</Text>
+			<Option Idx="0">Epics require more than one iterations; stories require at most one iteration; tasks are completed in less than one iteration.</Option>
+			<Option Idx="1">They have no relationship.</Option>
+			<Option Idx="2">Epics and stories each take longer than one iteration, but tasks are always completed in less than one iteration.</Option>
+			<Option Idx="3">All of these can be completed in less than one iteration.</Option>
+			<Answer>0</Answer>
+    </Question>
+
+</Questions>
