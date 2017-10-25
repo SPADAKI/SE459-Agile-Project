@@ -69,12 +69,11 @@ public class ProgressPage extends AGPage {
         statusArea.setStyle("-fx-background-color: #99b1c9;");
         GridPane.setConstraints(statusArea, 0, 7, 3, 30);
 
-
-
         // Add elements to the grid pane
         grid.getChildren().addAll(pageTitle, question, answerA, answerB, answerC, next, statusText,statusArea);
 
         scene = new Scene(grid, width, height);
+
 	}
 
 //    public HBox addHBox() {

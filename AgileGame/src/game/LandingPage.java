@@ -1,7 +1,11 @@
 package game;
 
+import exception.DuplicatePlayerException;
+import exception.NullPlayerException;
+import exception.NullTeamException;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -73,10 +77,10 @@ public class LandingPage extends AGPage {
         Button submitPlayerTeamTwo = new Button("Submit Player Name");
         grid.add(submitPlayerTeamTwo, 2, 4);
 
-        // Continue to Add Players Scene
-        Button continueToGame = new Button("Next");
-        //GridPane.setConstraints(continueToGame, 8, 5);
-        //continueToGame.setDisable(true);
+        // Continue to Progress Page Button
+        Button continueToGame = new Button("Start Game");
+        continueToGame.setAlignment(Pos.CENTER_RIGHT);
+        continueToGame.setDisable(true);
         grid.add(continueToGame, 1, 5);
 
         // Add elements to the gridpane
@@ -87,62 +91,88 @@ public class LandingPage extends AGPage {
         submitTeamOneName.setOnAction(e -> {
             teamOneName = "";
             String tempName = teamOneNameInput.getText();
-            if (!verifyName(tempName))
+            if (!verifyTeamName(tempName))
                 AlertBox.display("Error!", "Invalid Name. Try Again.");
             else {
                 teamOneName = tempName;
                 AlertBox.display("Success", String.format("Team Name '%s' successfully created.", teamOneName));
                 if (checkTeamNames(teamOneName, teamTwoName))
                     continueToGame.setDisable(false);
+                try {
+                    GameService.getInstance().setUp(new Team(teamOneName), new Team(teamTwoName));
+                } catch (NullTeamException error) {}
             }
-
+            teamOneNameInput.clear();
         });
 
         submitTeamTwoName.setOnAction(e -> {
             teamTwoName = "";
             String tempName = teamTwoNameInput.getText();
-            if (!verifyName(tempName))
+            if (!verifyTeamName(tempName))
                 AlertBox.display("Error!", "Invalid Name. Try Again.");
             else {
                 teamTwoName = tempName;
                 AlertBox.display("Success", String.format("Team Name '%s' successfully created.", teamTwoName));
                 if (checkTeamNames(teamOneName, teamTwoName))
                     continueToGame.setDisable(false);
+                try {
+                    GameService.getInstance().setUp(new Team(teamOneName), new Team(teamTwoName));
+                } catch (NullTeamException error) {}
             }
+            teamTwoNameInput.clear();
         });
 
         submitPlayerTeamOne.setOnAction(e -> {
             String name = addPlayerTeamOne.getText();
-            int x = checkTeamOneName(name);
-            if (x != -1) {
-                grid.add(new Label(name), 0, x + 3);
-                GridPane.setConstraints(addPlayerTeamOne, 0, x + 4);
-                GridPane.setConstraints(submitPlayerTeamOne, 0, x + 5);
-                numPlayerTeamOne += 1;
-            } else
-                AlertBox.display("Error!", "Invalid Name. Try Again.");
+            boolean x = checkTeamOnePlayerName(name);
+            try {
+                if (numPlayerTeamOne == maxPlayers)
+                    AlertBox.display("Error!", "Max Number of Players reached.");
+                else if (x) {
+                    GameService.getInstance().addPlayerTeamOne(new Player(name));
+                    grid.add(new Label(name), 0, numPlayerTeamOne + 3);
+                    GridPane.setConstraints(addPlayerTeamOne, 0, numPlayerTeamOne + 4);
+                    GridPane.setConstraints(submitPlayerTeamOne, 0, numPlayerTeamOne + 5);
+                    numPlayerTeamOne += 1;
+                } else
+                    AlertBox.display("Error!", "Invalid Name. Try Again.");
+            } catch (NullPlayerException | DuplicatePlayerException | NullTeamException error){
+                AlertBox.display("Error!", error.getMessage());
+            }
+            addPlayerTeamOne.clear();
         });
 
         submitPlayerTeamTwo.setOnAction(e -> {
             String name = addPlayerTeamTwo.getText();
-            int x = checkTeamTwoName(name);
-            if (x != 0) {
-                grid.add(new Label(name), 2, x + 3);
-                GridPane.setConstraints(addPlayerTeamTwo, 2, x + 4);
-                GridPane.setConstraints(submitPlayerTeamTwo, 2, x + 5);
-                numPlayerTeamTwo += 1;
-            } else
-                AlertBox.display("Error!", "Invalid Name. Try Again.");
+            boolean x = checkTeamTwoPlayerName(name);
+            try {
+                if (numPlayerTeamTwo == maxPlayers)
+                    AlertBox.display("Error!", "Max Number of Players reached.");
+                else if (x) {
+                    GameService.getInstance().addPlayerTeamTwo(new Player(name));
+                    grid.add(new Label(name), 2, numPlayerTeamTwo + 3);
+                    GridPane.setConstraints(addPlayerTeamTwo, 2, numPlayerTeamTwo + 4);
+                    GridPane.setConstraints(submitPlayerTeamTwo, 2, numPlayerTeamTwo + 5);
+                    numPlayerTeamTwo += 1;
+                } else
+                    AlertBox.display("Error!", "Invalid Name. Try Again.");
+            } catch (NullPlayerException | DuplicatePlayerException | NullTeamException error){
+                AlertBox.display("Error!", error.getMessage());
+            }
+            addPlayerTeamTwo.clear();
         });
 
         continueToGame.setOnAction( e -> {
-        	application.startGame();
+            if (GameService.getInstance().checkSetUp())
+        	    application.startGame();
+            else
+                AlertBox.display("Error!", "Game parameters not set up!");
         });
 	}
 
     // Method doesn't allow null names, or strings below 0, or above 20 in length
     // Future: Should check if team names are the same
-    private boolean verifyName(String name) {
+    private boolean verifyTeamName(String name) {
         if (name == null || name.length() <= 0 || name.length() > 20)
             return false;
         return true;
@@ -153,16 +183,16 @@ public class LandingPage extends AGPage {
     }
 
     // Checks for valid player name
-    private int checkTeamOneName(String name) {
+    private boolean checkTeamOnePlayerName(String name) {
         if (name != null && name.length() > 0 && name.length() <= MAX_NAME_LENGTH)
-            return numPlayerTeamOne;
-        return -1;
+            return true;
+        return false;
     }
 
     // Checks for valid player name
-    private int checkTeamTwoName(String name) {
+    private boolean checkTeamTwoPlayerName(String name) {
         if (name != null && name.length() > 0 && name.length() <= MAX_NAME_LENGTH)
-            return numPlayerTeamTwo;
-        return -1;
+            return true;
+        return false;
     }
 }

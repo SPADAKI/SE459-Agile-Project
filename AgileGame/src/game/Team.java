@@ -1,5 +1,8 @@
 package game;
 
+import exception.DuplicatePlayerException;
+import exception.NullPlayerException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +27,12 @@ public class Team {
 
     public void addPoints(int points) { score += points; }
 
-    public boolean addMember(Player player) {
-        if (player != null && !members.contains(player)) {
-            members.add(player);
-        return true;
-        }
-        return false;
+    public void addMember(Player player) throws DuplicatePlayerException, NullPlayerException {
+        if (player == null)
+            throw new NullPlayerException("Cannot add a null player!");
+        if (members.contains(player))
+            throw new DuplicatePlayerException("Player already exists!");
+        members.add(player);
     }
 
     public List<Player> getMembers() { return members; }
