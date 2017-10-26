@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class GameService {
 
-    private static int MIN_REQUIRED_PLAYERS = 2;
+    private static int MIN_REQUIRED_PLAYERS = 1;
     private Team teamOne;
     private Team teamTwo;
     private HashMap<Team, List<IQuestion>> questions;
@@ -40,10 +40,12 @@ public class GameService {
      * @throws NullTeamException if either @param team is null
      */
     public void setUp(Team teamOne, Team teamTwo) throws NullTeamException{
+    	
         if (teamOne == null || teamTwo == null) {
             activeGame = false;
             throw new NullTeamException("Team does not exist!");
         }
+        activeGame = true;
         this.teamOne = teamOne;
         this.teamTwo = teamTwo;
         List<IQuestion> listOne = new ArrayList<>();
@@ -51,7 +53,7 @@ public class GameService {
         questions.put(teamOne, listOne);
         questions.put(teamTwo, listTwo);
         this.game = new Game();
-        activeGame = true;
+        
     }
 
     /**
@@ -59,6 +61,7 @@ public class GameService {
      * @return activeGame boolean whether setup has been successful.
      */
     protected boolean checkSetUp() {
+ 
         return !(teamOne.getMembers().size() < MIN_REQUIRED_PLAYERS || teamTwo.getMembers().size() < MIN_REQUIRED_PLAYERS) && activeGame;
     }
 

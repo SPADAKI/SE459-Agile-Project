@@ -19,9 +19,11 @@ public class LandingPage extends AGPage {
     private static int MAX_NAME_LENGTH = 15;
     private static String teamOneName;
     private static String teamTwoName;
-    private static int maxPlayers = 6;
+    private static int maxPlayers = 5;
     private static int numPlayerTeamOne;
     private static int numPlayerTeamTwo;
+    private Team teamOne, teamTwo;
+    
 
     public LandingPage(AgileGame app, int width, int height) {
     	super(app, width, height);
@@ -53,7 +55,7 @@ public class LandingPage extends AGPage {
 
         Label gameTitle = new Label("Team Six Agile Game");
         GridPane.setHalignment(gameTitle, HPos.CENTER);
-        //GridPane.setConstraints(gameTitle, 1, 0);
+        GridPane.setConstraints(gameTitle, 1, 0);
         
         // Team One Name Input fields
         TextField teamOneNameInput = new TextField();
@@ -65,6 +67,7 @@ public class LandingPage extends AGPage {
         grid.add(addPlayerTeamOne, 0, 3);
         Button submitPlayerTeamOne = new Button("Submit Player Name");
         grid.add(submitPlayerTeamOne, 0, 4);
+        
 
         // Team Two Name Input fields
         TextField teamTwoNameInput = new TextField();
@@ -76,7 +79,12 @@ public class LandingPage extends AGPage {
         grid.add(addPlayerTeamTwo, 2, 3);
         Button submitPlayerTeamTwo = new Button("Submit Player Name");
         grid.add(submitPlayerTeamTwo, 2, 4);
-
+        
+        // Create Two Teams Object based on input
+        teamOne = new Team(teamOneNameInput.getText());
+        teamTwo= new Team(teamTwoNameInput.getText());
+        
+        
         // Continue to Progress Page Button
         Button continueToGame = new Button("Start Game");
         continueToGame.setAlignment(Pos.CENTER_RIGHT);
@@ -97,9 +105,9 @@ public class LandingPage extends AGPage {
                 teamOneName = tempName;
                 AlertBox.display("Success", String.format("Team Name '%s' successfully created.", teamOneName));
                 if (checkTeamNames(teamOneName, teamTwoName))
-                    continueToGame.setDisable(false);
+                    continueToGame.setDisable(false);            
                 try {
-                    GameService.getInstance().setUp(new Team(teamOneName), new Team(teamTwoName));
+                	GameService.getInstance().setUp(teamOne, teamTwo);
                 } catch (NullTeamException error) {}
             }
             teamOneNameInput.clear();
@@ -116,12 +124,13 @@ public class LandingPage extends AGPage {
                 if (checkTeamNames(teamOneName, teamTwoName))
                     continueToGame.setDisable(false);
                 try {
-                    GameService.getInstance().setUp(new Team(teamOneName), new Team(teamTwoName));
+                	GameService.getInstance().setUp(teamOne, teamTwo);
                 } catch (NullTeamException error) {}
             }
             teamTwoNameInput.clear();
         });
-        //Setting Limit to maximum (6) number of Team Members need to be added to each team
+        
+        //Setting Limit to maximum (5) number of Team Members need to be added to each team
         submitPlayerTeamOne.setOnAction(e -> {
             String name = addPlayerTeamOne.getText();
             boolean x = checkTeamOnePlayerName(name);

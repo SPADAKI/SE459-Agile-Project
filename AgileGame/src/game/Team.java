@@ -11,17 +11,18 @@ import java.util.List;
  */
 public class Team {
 
-    private String name;
+    private String teamName;
     private int score;
     private List<Player> members;
 
     public Team(String name) {
-        this.name = name;
+        this.teamName = name;
         this.score = 0;
         members = new ArrayList<>();
     }
-
-    public String getName() { return name; }
+    public void setTeamName(String teamName) {this.teamName = teamName;};
+    
+    public String getTeamName() { return teamName; }
 
     public int getScore() { return score; }
 
