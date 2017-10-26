@@ -54,7 +54,7 @@ public class LandingPage extends AGPage {
         Label gameTitle = new Label("Team Six Agile Game");
         GridPane.setHalignment(gameTitle, HPos.CENTER);
         //GridPane.setConstraints(gameTitle, 1, 0);
-
+        
         // Team One Name Input fields
         TextField teamOneNameInput = new TextField();
         teamOneNameInput.setPromptText("Team One Name");
@@ -121,7 +121,7 @@ public class LandingPage extends AGPage {
             }
             teamTwoNameInput.clear();
         });
-
+        //Setting Limit to maximum (6) number of Team Members need to be added to each team
         submitPlayerTeamOne.setOnAction(e -> {
             String name = addPlayerTeamOne.getText();
             boolean x = checkTeamOnePlayerName(name);
@@ -194,5 +194,10 @@ public class LandingPage extends AGPage {
         if (name != null && name.length() > 0 && name.length() <= MAX_NAME_LENGTH)
             return true;
         return false;
+    }
+    
+    private void Quit() {
+    	System.out.println("You Quit the Game");
+    	
     }
 }
