@@ -2,6 +2,8 @@ package game;
 
 import java.util.List;
 
+import com.sun.java.swing.plaf.windows.resources.windows;
+
 import database.IQuestion;
 import database.QuestionProvider;
 import exception.DuplicatePlayerException;
@@ -231,6 +233,5 @@ public class LandingPage extends AGPage {
     
     private void Quit() {
     	System.out.println("You Quit the Game");
-    	
     }
 }
