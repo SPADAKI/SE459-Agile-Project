@@ -1,5 +1,9 @@
 package game;
 
+import java.util.List;
+
+import database.IQuestion;
+import database.QuestionProvider;
 import exception.DuplicatePlayerException;
 import exception.NullPlayerException;
 import exception.NullTeamException;
@@ -21,7 +25,10 @@ public class LandingPage extends AGPage {
     private static int maxPlayers = 5;
     private static int numPlayerTeamOne;
     private static int numPlayerTeamTwo;
-    private Team teamOne, teamTwo;
+    private static Team teamOne, teamTwo;
+    
+    List<IQuestion> teamOneQuestions;
+    List<IQuestion> teamTwoQuestions;
     
 
     public LandingPage(AgileGame app, int width, int height) {
@@ -80,9 +87,8 @@ public class LandingPage extends AGPage {
         grid.add(submitPlayerTeamTwo, 2, 4);
         
         // Create Two Teams Object based on input
-        teamOne = new Team(teamOneNameInput.getText());
-        teamTwo= new Team(teamTwoNameInput.getText());
         
+        teamTwo = new Team(teamTwoNameInput.getText());
         
         // Continue to Progress Page Button
         Button continueToGame = new Button("Start Game");
@@ -95,38 +101,47 @@ public class LandingPage extends AGPage {
 
         scene = new Scene(grid, width, height);
 
-        submitTeamOneName.setOnAction(e -> {
-            teamOneName = "";
-            String tempName = teamOneNameInput.getText();
-            if (!verifyTeamName(tempName))
-                AlertBox.display("Error!", "Invalid Name. Try Again.");
-            else {
-                teamOneName = tempName;
-                AlertBox.display("Success", String.format("Team Name '%s' successfully created.", teamOneName));
-                if (checkTeamNames(teamOneName, teamTwoName))
-                    continueToGame.setDisable(false);            
-                try {
-                	GameService.getInstance().setUp(teamOne, teamTwo);
-                } catch (NullTeamException error) {}
-            }
-            teamOneNameInput.clear();
-        });
+//========================================================================================================
+        
+		submitTeamOneName.setOnAction(e -> {
 
-        submitTeamTwoName.setOnAction(e -> {
-            teamTwoName = "";
-            String tempName = teamTwoNameInput.getText();
-            if (!verifyTeamName(tempName))
-                AlertBox.display("Error!", "Invalid Name. Try Again.");
-            else {
-                teamTwoName = tempName;
-                AlertBox.display("Success", String.format("Team Name '%s' successfully created.", teamTwoName));
-                if (checkTeamNames(teamOneName, teamTwoName))
-                    continueToGame.setDisable(false);
-                try {
-                	GameService.getInstance().setUp(teamOne, teamTwo);
-                } catch (NullTeamException error) {}
-            }
-            teamTwoNameInput.clear();
+			// set team name to static, easy to retrieve, and cleaner without Exception
+			teamOne = new Team(teamOneNameInput.getText());
+			System.out.println("Set Team1 name to: " + teamOne.getTeamName());
+			if (!verifyTeamName(teamOne.getTeamName()))
+				AlertBox.display("Error!", "Invalid Name. Try Again.");
+			else {
+				AlertBox.display("Success",
+						String.format("Team Name '%s' successfully created.", teamOne.getTeamName()));
+				if (checkTeamNames(teamOne.getTeamName(), teamTwo.getTeamName()))
+					continueToGame.setDisable(false);
+				try {
+					GameService.getInstance().setUp(teamOne, teamTwo);
+					teamOne.setQuestions(10);
+					System.out.printf("Team one loaded: %s questions.\n", teamOne.getQuestions().size());
+				} catch (NullTeamException error) {
+				}
+			}
+		});
+
+		submitTeamTwoName.setOnAction(e -> {
+
+			teamTwo = new Team(teamTwoNameInput.getText());
+			System.out.println("Set Team2 name to: " + teamTwo.getTeamName());
+			if (!verifyTeamName(teamTwo.getTeamName()))
+				AlertBox.display("Error!", "Invalid Name. Try Again.");
+			else {
+				AlertBox.display("Success",
+						String.format("Team Name '%s' successfully created.", teamTwo.getTeamName()));
+				if (checkTeamNames(teamOne.getTeamName(), teamTwo.getTeamName()))
+					continueToGame.setDisable(false);
+				try {
+					GameService.getInstance().setUp(teamOne, teamTwo);
+					teamOne.setQuestions(10);
+					System.out.printf("Team Two loaded: %s questions.\n", teamOne.getQuestions().size());
+				} catch (NullTeamException error) {
+				}
+			}
         });
         
         //Setting Limit to maximum (5) number of Team Members need to be added to each team
@@ -169,13 +184,16 @@ public class LandingPage extends AGPage {
             }
             addPlayerTeamTwo.clear();
         });
-
+        
+        // Load questions to each team list after continue
         continueToGame.setOnAction( e -> {
-            if (GameService.getInstance().checkSetUp())
-        	    application.startGame();
-            else
-                AlertBox.display("Error!", "Game parameters not set up!");
-        });
+			if (GameService.getInstance().checkSetUp()) {
+				teamOneQuestions = QuestionProvider.getQuestions(10);
+				teamTwoQuestions = QuestionProvider.getQuestions(10);
+				application.startGame();
+			} else
+				AlertBox.display("Error!", "Game parameters not set up!");
+		});
 	}
 
     // Method doesn't allow null names, or strings below 0, or above 20 in length
