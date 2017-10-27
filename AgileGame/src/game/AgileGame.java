@@ -14,7 +14,7 @@ public class AgileGame extends Application {
 
 	private AGPage currentPage = null;
 	private LandingPage lanPage = new LandingPage(this, width, height);
-	private ProgressPage proPage = new ProgressPage(this, width, height);
+//	private ProgressPage proPage = new ProgressPage(this, width, height);
 	private CongratulationPage conPage = new CongratulationPage(this, width, height);
 
 	@Override
@@ -46,6 +46,7 @@ public class AgileGame extends Application {
 	}
 
 	public void startGame() {
+		ProgressPage proPage = new ProgressPage(this, width, height);
 		currentPage = proPage;
 		currentPage.updateSize(width, height);
 		window.setScene(currentPage.getScene());

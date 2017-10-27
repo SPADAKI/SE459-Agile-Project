@@ -9,9 +9,6 @@ import java.util.List;
 import database.IQuestion;
 import database.QuestionProvider;
 
-/**
- * Created by Ryan on 10/10/2017.
- */
 public class Team {
 
 	private String teamName;
@@ -28,6 +25,10 @@ public class Team {
 
 	public List<IQuestion> getQuestions() {
 		return questions;
+	}
+	
+	public IQuestion getQuestionbyIdx(int idx) {
+		return questions.get(idx);
 	}
 
 	public void setQuestions(int questionNum) {

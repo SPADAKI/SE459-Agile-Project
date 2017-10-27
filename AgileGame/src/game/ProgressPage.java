@@ -1,7 +1,9 @@
 package game;
 
-import database.QuestionProvider;
-import database.SingleChoiceQuestion;
+import java.util.List;
+
+import database.IQuestion;
+import database.IQuestion.Option;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -32,72 +34,78 @@ public class ProgressPage extends AGPage {
         midConstraint.setPercentWidth(70);
         ColumnConstraints rightContraint = new ColumnConstraints();
         rightContraint.setPercentWidth(15);
-        
-        
+
         
         //question title in column 1, row 0
         Label pageTitle = new Label("QUESTION:");
         pageTitle.setStyle("-fx-font: bold 18 arial;");
-
+        GridPane.setConstraints(pageTitle, 0, 0);
         GridPane.setHalignment(pageTitle, HPos.CENTER);
-        GridPane.setConstraints(pageTitle, 1, 0);
-
-        //Sample "hard-code" question in column 1, row 1
         
-        Text question = new Text("Which of the following is example of the kinds of things that can wrong during a typical software development effort?");
+
+//>>>>>>>>>>>>>>>>>load from database works, need to work on auto generate buttons        
+        //if team 1 turn: print questions by idx from list
+        int qIdx = 0;
+        Team teamOne = LandingPage.getTeamOne();
+        IQuestion curQuestion = teamOne.getQuestions().get(qIdx);
+        String qText = curQuestion.getQuestion();
+        int curValue = curQuestion.getAnswer().getVal();
+        int curScore = teamOne.getScore();
+        int nextScore = teamOne.getScore() + curValue;
+        
+        
         //set location to column=0 row=1, columnSpan, rowSpan
-        GridPane.setConstraints(question, 1, 1);
+        Text question = new Text(qText);
+        GridPane.setConstraints(question, 0, 1);
+        question.setStyle("-fx-font: bold 14 arial;");
         question.setWrappingWidth(app.getWidth());
 
+        Button answerA = new Button(curQuestion.getOption(Option.fromInt(0)));
+        Button answerB = new Button(curQuestion.getOption(Option.fromInt(1)));
+        Button answerC = new Button(curQuestion.getOption(Option.fromInt(2)));
         
-        
-
-        Button answerA = new Button("A. Another name for the Waterfall model.");
-        Button answerB = new Button("B. The closer to the end of the project we are, the easier it is to project exactly when we'll be able to deliver the completed software.");
-        Button answerC = new Button("C. We never know exactly what we're building until later on in a project.");
         Button next = new Button("Next");
-        GridPane.setConstraints(next, 2, 5);
-        GridPane.setConstraints(answerA, 0, 2, 3, 1);
+        GridPane.setConstraints(next, 0, 5);
+        GridPane.setConstraints(answerA, 0, 2);
         answerA.wrapTextProperty().setValue(true);
-        answerA.setMaxWidth(500);
+        answerA.setMaxWidth(600);
         answerA.setAlignment(Pos.BASELINE_LEFT);
-        GridPane.setConstraints(answerB, 0, 3, 3, 1);
+        GridPane.setConstraints(answerB, 0, 3);
         answerB.wrapTextProperty().setValue(true);
-        answerB.setMaxWidth(500);
+        answerB.setMaxWidth(600);
         answerB.setAlignment(Pos.BASELINE_LEFT);
-        GridPane.setConstraints(answerC, 0, 4, 3, 1);
+        GridPane.setConstraints(answerC, 0, 4);
         answerC.wrapTextProperty().setValue(true);
-        answerC.setMaxWidth(500);
+        answerC.setMaxWidth(600);
         answerC.setAlignment(Pos.BASELINE_LEFT);
 
         //statusArea: show users and scores
+        
         Text statusText = new Text("Status board:");
-        GridPane.setConstraints(statusText, 0, 6, 3, 1);
+        statusText.setStyle("-fx-font: bold 16 arial;");
+        GridPane.setConstraints(statusText, 0, 6);
+        
+        Text curQuestionValue = new Text("Current question value: " + curValue);
+        GridPane.setConstraints(curQuestionValue, 0, 7);
+        
+        Text scoreBoard = new Text("Team One current Total Scores: " + curScore);
+        GridPane.setConstraints(scoreBoard, 0, 8);
+        
+        Text updateScoreBoard = new Text("If correct, Total Scores: " + nextScore);
+        GridPane.setConstraints(updateScoreBoard, 0, 9);
 
         HBox statusArea = new HBox();
         statusArea.setPadding(new Insets(15, 5, 15, 12));
         statusArea.setSpacing(10);
-        statusArea.setMaxWidth(500);
-        statusArea.setStyle("-fx-background-color: #99b1c9;");
+        statusArea.setMaxWidth(width);
         GridPane.setConstraints(statusArea, 0, 7, 3, 30);
 
         // Add elements to the grid pane
-        grid.getChildren().addAll(pageTitle, question, answerA, answerB, answerC, next, statusText,statusArea);
+        grid.getChildren().addAll(pageTitle, question, answerA, answerB, answerC, next, 
+        		curQuestionValue, statusText, scoreBoard, statusArea, updateScoreBoard);
 
         scene = new Scene(grid, width, height);
 
 	}
 
-//    public HBox addHBox() {
-//
-//
-//        Button buttonCurrent = new Button("Current");
-//        buttonCurrent.setPrefSize(100, 20);
-//
-//        Button buttonProjected = new Button("Projected");
-//        buttonProjected.setPrefSize(100, 20);
-//        hbox.getChildren().addAll(buttonCurrent, buttonProjected);
-//
-//        return hbox;
-//    }
 }
