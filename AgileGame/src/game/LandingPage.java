@@ -89,6 +89,13 @@ public class LandingPage extends AGPage {
         continueToGame.setAlignment(Pos.CENTER_RIGHT);
         continueToGame.setDisable(true);
         grid.add(continueToGame, 1, 5);
+        
+        //Quit Button on Landing Page
+        Button QuitGame =new Button ("Quit Game");
+        QuitGame.setAlignment(Pos.CENTER_RIGHT);
+        QuitGame.setDisable(false);
+        grid.add(QuitGame, 2, 5);
+        
 
         // Add elements to the gridpane
         grid.getChildren().addAll(gameTitle);
