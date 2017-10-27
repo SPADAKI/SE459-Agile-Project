@@ -64,6 +64,8 @@ public class ProgressPage extends AGPage {
         Button answerB = new Button(curQuestion.getOption(Option.fromInt(1)));
         Button answerC = new Button(curQuestion.getOption(Option.fromInt(2)));
         
+     
+        
         Button next = new Button("Next");
         GridPane.setConstraints(next, 0, 5);
         GridPane.setConstraints(answerA, 0, 2);
@@ -78,6 +80,55 @@ public class ProgressPage extends AGPage {
         answerC.wrapTextProperty().setValue(true);
         answerC.setMaxWidth(600);
         answerC.setAlignment(Pos.BASELINE_LEFT);
+        
+        
+        // Button listener 
+           answerA.setOnAction(e -> {
+           	if (true/*0 == curQuestion.getAnswer()*/) {
+           		new CorrectAnswerBoard();
+           		//curScore += curValue;
+           		
+           		
+           	}
+           	else
+           	{
+           		new WrongAnswerBoard();
+           	}
+           	
+           });
+           
+           answerB.setOnAction(e -> {
+           	if (true/*0 == curQuestion.getAnswer()*/) {
+           		new CorrectAnswerBoard();
+           		//curScore += curValue;
+           	}
+           	else
+           	{
+           		new WrongAnswerBoard();
+           	}
+           	
+           });
+           
+           answerC.setOnAction(e -> {
+           	if (true/*0 == curQuestion.getAnswer()*/) {
+           		new CorrectAnswerBoard();
+           		//curScore += curValue;
+           	}
+           	else
+           	{
+           		new WrongAnswerBoard();
+           	}
+           	
+           });
+           
+           next.setOnAction(e -> {
+        	   
+        	   //qIdx += 1;
+        	   //load next question
+        	   //another team's turn
+              	
+               });
+           
 
         //statusArea: show users and scores
         
