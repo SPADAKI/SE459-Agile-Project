@@ -33,12 +33,11 @@ public class ProgressPage extends AGPage {
         ColumnConstraints rightContraint = new ColumnConstraints();
         rightContraint.setPercentWidth(15);
         
-        System.out.println("progress page:"+ QuestionProvider.getQuestions(10).size());
         
         
         //question title in column 1, row 0
         Label pageTitle = new Label("QUESTION:");
-//        pageTitle.setStyle("-fx-font: bold 18 arial;");
+        pageTitle.setStyle("-fx-font: bold 18 arial;");
 
         GridPane.setHalignment(pageTitle, HPos.CENTER);
         GridPane.setConstraints(pageTitle, 1, 0);
@@ -47,10 +46,11 @@ public class ProgressPage extends AGPage {
         
         Text question = new Text("Which of the following is example of the kinds of things that can wrong during a typical software development effort?");
         //set location to column=0 row=1, columnSpan, rowSpan
-        GridPane.setConstraints(question, 0, 1, 3, 1);
-        question.setWrappingWidth(550);
-        question.setStyle("-fx-font: bold 18 arial;");
+        GridPane.setConstraints(question, 1, 1);
+        question.setWrappingWidth(app.getWidth());
 
+        
+        
 
         Button answerA = new Button("A. Another name for the Waterfall model.");
         Button answerB = new Button("B. The closer to the end of the project we are, the easier it is to project exactly when we'll be able to deliver the completed software.");

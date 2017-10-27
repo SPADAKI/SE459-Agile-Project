@@ -48,15 +48,6 @@ public class GameService {
         activeGame = true;
         this.teamOne = teamOne;
         this.teamTwo = teamTwo;
-        
-        List<IQuestion> listOne = new ArrayList<>();
-        List<IQuestion> listTwo = new ArrayList<>();
-        
-        questions.put(teamOne, listOne);
-        questions.put(teamTwo, listTwo);
-        
-        this.game = new Game();
-
     }
 
     /**
