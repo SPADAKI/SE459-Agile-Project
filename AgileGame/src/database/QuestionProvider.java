@@ -19,7 +19,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class QuestionProvider {
-	static private final String filePath = "data/Questions.xml";
+	static private final String filePath = "AgileGame/data/Questions.xml";
 	static private boolean loaded = false;
 	static private ArrayList<IQuestion> questions = new ArrayList<IQuestion>();
 

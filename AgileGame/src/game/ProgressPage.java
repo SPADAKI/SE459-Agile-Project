@@ -1,5 +1,8 @@
 package game;
 
+import database.QuestionProvider;
+import database.SingleChoiceQuestion;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,27 +15,36 @@ import javafx.scene.text.Text;
 
 
 public class ProgressPage extends AGPage {
+	
 	public ProgressPage(AgileGame app, int width, int height) {
 		super(app, width, height);
 
 		// Grid setup
         GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10, 10, 10, 30));//top, right, bottom, and left padding
+        grid.setPadding(new Insets(10, 10, 10, 10));//top, right, bottom, and left padding
         // Set vertical and horizontal gap
         grid.setVgap(10);//between element
         grid.setHgap(10);
-        grid.getColumnConstraints().add(new ColumnConstraints(150));
-        grid.getColumnConstraints().add(new ColumnConstraints(300));
-        grid.getColumnConstraints().add(new ColumnConstraints(150));
-
-
+        // Column setup
+        ColumnConstraints leftContraint = new ColumnConstraints();
+        leftContraint.setPercentWidth(15);
+        ColumnConstraints midConstraint = new ColumnConstraints();
+        midConstraint.setPercentWidth(70);
+        ColumnConstraints rightContraint = new ColumnConstraints();
+        rightContraint.setPercentWidth(15);
+        
+        System.out.println("progress page:"+ QuestionProvider.getQuestions(10).size());
+        
+        
         //question title in column 1, row 0
         Label pageTitle = new Label("QUESTION:");
-        pageTitle.setStyle("-fx-font: bold 18 arial;");
+//        pageTitle.setStyle("-fx-font: bold 18 arial;");
 
+        GridPane.setHalignment(pageTitle, HPos.CENTER);
         GridPane.setConstraints(pageTitle, 1, 0);
 
         //Sample "hard-code" question in column 1, row 1
+        
         Text question = new Text("Which of the following is example of the kinds of things that can wrong during a typical software development effort?");
         //set location to column=0 row=1, columnSpan, rowSpan
         GridPane.setConstraints(question, 0, 1, 3, 1);

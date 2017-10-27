@@ -15,7 +15,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public class LandingPage extends AGPage {
-    private int numRows = 15;
     private static int MAX_NAME_LENGTH = 15;
     private static String teamOneName;
     private static String teamTwoName;
