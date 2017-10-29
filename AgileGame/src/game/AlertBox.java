@@ -8,27 +8,35 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/**
- * Created by Ryan on 10/10/2017.
- */
-public class AlertBox {
 
-    public static void display(String title, String message) {
+public class AlertBox {
+        static boolean answer;
+    public static Boolean display(String title, String message) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
         window.setMinWidth(250);
-
         Label label = new Label(message);
-        Button closeButton = new Button("Close the window");
-        closeButton.setOnAction(event -> window.close());
-
+        
+        Button yesButton = new Button("Yes");
+        Button noButton = new Button("No");
+        
+        yesButton.setOnAction(e -> {
+        	answer=true;
+        	window.close();
+        });
+        
+        noButton.setOnAction(e -> {
+        	answer=false;
+        	window.close();
+        });
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(label, closeButton);
+        layout.getChildren().addAll(label, yesButton,noButton);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout, 400, 200);
         window.setScene(scene);
         window.showAndWait();
+		return answer;
     }
 }
