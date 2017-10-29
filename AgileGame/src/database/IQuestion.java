@@ -1,7 +1,7 @@
 package database;
 
 public interface IQuestion {
-	
+
 	public enum Option {
 		A(0), B(1), C(2), D(3);
 
@@ -29,7 +29,7 @@ public interface IQuestion {
 
 	public String getQuestion();
 
-	public String getOption(Option opt);
+	public String[] getOptions();
 
 	public Option getAnswer();
 

@@ -19,12 +19,13 @@ public class GameService {
     private static int NUMBER_OF_ROUNDS = 10;
     private Team teamOne;
     private Team teamTwo;
-    private HashMap<Team, List<IQuestion>> questions;
     private Game game;
     private static GameService service;
     private boolean activeGame;
-    private boolean teamOneTurn;
-    private boolean teamTwoTurn;
+
+    private int currentTeamIdx;	//0: TeamOne, 1: TeamTwo
+    private ArrayList<IQuestion> questions;
+    private int questionIdx;
 
     /**
      * GameService factory method
@@ -51,10 +52,6 @@ public class GameService {
         activeGame = true;
         this.teamOne = teamOne;
         this.teamTwo = teamTwo;
-        teamOne.setQuestions(NUMBER_OF_ROUNDS);
-        teamTwo.setQuestions(NUMBER_OF_ROUNDS);
-        teamOneTurn = true;
-        teamTwoTurn = false;
     }
 
     /**
@@ -139,9 +136,29 @@ public class GameService {
         return teamTwo.getMembers();
     }
 
-    // Method not done yet
-    public IQuestion getQuestion(Team team) {
-        return null;
+    // Jason added functions
+    public void startNewRound() {
+    	currentTeamIdx = 0;
+        questions = QuestionProvider.getQuestions(20);
+        questionIdx = 0;
+    }
+
+    public int getCurrentTeamIdx() {
+    	return currentTeamIdx;
+    }
+
+    public Team getCurrentTeam() {
+    	if(currentTeamIdx == 0) return teamOne;
+    	else return teamTwo;
+    }
+
+   public void nextTurn() {
+	   currentTeamIdx = (++currentTeamIdx)%1;
+   }
+
+    public IQuestion getNextQuestion() {
+    	if(questionIdx < questions.size()) return questions.get(questionIdx++);
+    	else return null;
     }
 
     /**
@@ -152,5 +169,6 @@ public class GameService {
         teamTwo = null;
         game = null;
         activeGame = false;
+        questions = null;
     }
 }

@@ -121,8 +121,6 @@ public class LandingPage extends AGPage {
 					continueToGame.setDisable(false);
 				try {
 					GameService.getInstance().setUp(teamOne, teamTwo);
-					teamOne.setQuestions(10);
-					System.out.printf("Team one loaded: %s questions.\n", teamOne.getQuestions().size());
 				} catch (NullTeamException error) {
 				}
 			}
@@ -141,8 +139,6 @@ public class LandingPage extends AGPage {
 					continueToGame.setDisable(false);
 				try {
 					GameService.getInstance().setUp(teamOne, teamTwo);
-					teamOne.setQuestions(10);
-					System.out.printf("Team Two loaded: %s questions.\n", teamOne.getQuestions().size());
 				} catch (NullTeamException error) {
 				}
 			}

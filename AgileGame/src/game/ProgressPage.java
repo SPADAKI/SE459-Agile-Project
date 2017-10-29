@@ -11,6 +11,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -20,16 +22,17 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
-public class ProgressPage extends AGPage {
+public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 	private QuestionLayout questionLayout;
 	private CardLayout cardLayout;
 	private TeamLayout teamLayout;
 
+	private IQuestion curQuestion;
 
 	public ProgressPage(AgileGame app, int width, int height) {
 		super(app, width, height);
 
-		questionLayout = new QuestionLayout();
+		questionLayout = new QuestionLayout(this);
 		cardLayout = new CardLayout();
 		cardLayout.setVisible(false);
 		teamLayout = new TeamLayout();
@@ -39,8 +42,54 @@ public class ProgressPage extends AGPage {
 		group.getChildren().add(cardLayout);
 		group.getChildren().add(teamLayout);
 
+		curQuestion = GameService.getInstance().getNextQuestion();
+		questionLayout.setQuestion(curQuestion);
+
 		scene = new Scene(group, width, height);
 	}
+
+	// delegate
+	public void selectAnswer(int idx) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		if(idx == curQuestion.getAnswer().getVal()) {
+			// right answer
+			alert.setTitle("Congratulation");
+			alert.setHeaderText(null);
+			Team team = GameService.getInstance().getCurrentTeam();
+			alert.setContentText("Your answer is right!" + team.getTeamName() + " get 1 point!");
+		}
+		else {
+			// wrong answer
+			alert.setTitle("Sorry");
+			alert.setHeaderText(null);
+			Team team = GameService.getInstance().getCurrentTeam();
+			alert.setContentText("Your answer is wrong!");
+		}
+		alert.showAndWait();
+		// go to next question
+		curQuestion = GameService.getInstance().getNextQuestion();
+		if(curQuestion == null) {
+			// no more question, game over, go back to the LandingPage
+			application.showLandingPage();
+		}
+		else {
+			questionLayout.setQuestion(curQuestion);
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	// For testing
 	public ProgressPage(){

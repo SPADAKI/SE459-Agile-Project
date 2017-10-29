@@ -14,27 +14,12 @@ public class Team {
 	private String teamName;
 	private int score;
 	private List<Player> members;
-	private List<IQuestion> questions;
-	
+
 	public Team(String name) {
 		this.teamName = name;
 		this.score = 0;
 		members = new ArrayList<>();
-		questions = new ArrayList<>();
 	}
-
-	public List<IQuestion> getQuestions() {
-		return questions;
-	}
-	
-	public IQuestion getQuestionbyIdx(int idx) {
-		return questions.get(idx);
-	}
-
-	public void setQuestions(int questionNum) {
-		questions =  QuestionProvider.getQuestions(questionNum);
-	}
-
 
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;

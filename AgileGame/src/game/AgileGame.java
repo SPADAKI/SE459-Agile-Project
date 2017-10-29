@@ -43,17 +43,13 @@ public class AgileGame extends Application {
 	}
 
 	public void showLandingPage() {
-//		currentPage = lanPage;
-//		currentPage.updateSize(width, height);
-//		window.setScene(currentPage.getScene());
-
-		ProgressPage proPage = new ProgressPage(this, width, height);
-		currentPage = proPage;
+		currentPage = lanPage;
 		currentPage.updateSize(width, height);
 		window.setScene(currentPage.getScene());
 	}
 
 	public void startGame() {
+		GameService.getInstance().startNewRound();
 		ProgressPage proPage = new ProgressPage(this, width, height);
 		currentPage = proPage;
 		currentPage.updateSize(width, height);
