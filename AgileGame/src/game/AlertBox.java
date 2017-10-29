@@ -30,10 +30,10 @@ public class AlertBox {
         	answer=false;
         	window.close();
         });
+        
         VBox layout = new VBox(10);
         layout.getChildren().addAll(label, yesButton,noButton);
         layout.setAlignment(Pos.CENTER);
-
         Scene scene = new Scene(layout, 400, 200);
         window.setScene(scene);
         window.showAndWait();

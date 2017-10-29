@@ -205,16 +205,21 @@ public class LandingPage extends AGPage {
     //Quit Function called
 	private void QuitGame() {
 		Boolean answer = AlertBox.display("Title of Window","Sure you want to quit?");
-		if(answer)
+		if(answer==true) {
+			Platform.exit();
+			System.exit(0);
 		System.out.println("You Quit the Game");
-	    LandingPage.exit();
+		}
+		else {
+			System.out.println("Continue");
+		}
 	}
 
-	private static void exit() {
+	//private static void exit() {
 		// TODO Auto-generated method stub
-		Platform.exit();
-		System.exit(0);
-	}
+	//	Platform.exit();
+	//	System.exit(0);
+	//}
 
 	// Method doesn't allow null names, or strings below 0, or above 20 in length
     // Future: Should check if team names are the same
