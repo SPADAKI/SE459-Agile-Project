@@ -20,13 +20,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public class LandingPage extends AGPage {
-	private static int MAX_NAME_LENGTH = 15;
-	private static String teamOneName;
-	private static String teamTwoName;
-	private static int maxPlayers = 5;
-	private static int numPlayerTeamOne;
-	private static int numPlayerTeamTwo;
-	protected static Team teamOne, teamTwo;
+	private int MAX_NAME_LENGTH = 15;
+	private String teamOneName;
+	private String teamTwoName;
+	private int maxPlayers = 5;
+	private int numPlayerTeamOne;
+	private int numPlayerTeamTwo;
+	private Team teamOne, teamTwo;
 
 	public LandingPage(AgileGame app, int width, int height) {
 		super(app, width, height);
@@ -200,8 +200,8 @@ public class LandingPage extends AGPage {
             } catch (NullPlayerException | NullTeamException error) { error.printStackTrace(); }
 		});
 	}
-	
-	
+
+
     //Quit Function called
 	private void QuitGame() {
 		Boolean answer = AlertBox.display("Quit Game?","Sure you want to quit?");
