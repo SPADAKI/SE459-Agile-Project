@@ -20,7 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class QuestionLayout extends Group {
+public class QuestionLayout extends Pane {
 	private QuestionLayoutDelegate delegate;
 	private Text txtQuestion;
 	private Button[] buttons;

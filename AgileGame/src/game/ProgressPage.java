@@ -32,20 +32,20 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 	public ProgressPage(AgileGame app, int width, int height) {
 		super(app, width, height);
 
+		Pane pane = new Pane();
+
 		questionLayout = new QuestionLayout(this);
 		cardLayout = new CardLayout();
 		cardLayout.setVisible(false);
 		teamLayout = new TeamLayout();
+		teamLayout.setLayoutY(400);
 
-		Group group = new Group();
-		group.getChildren().add(questionLayout);
-		group.getChildren().add(cardLayout);
-		group.getChildren().add(teamLayout);
+		pane.getChildren().addAll(questionLayout, cardLayout, teamLayout);
 
 		curQuestion = GameService.getInstance().getNextQuestion();
 		questionLayout.setQuestion(curQuestion);
 
-		scene = new Scene(group, width, height);
+		scene = new Scene(pane, width, height);
 	}
 
 	// delegate
@@ -76,17 +76,6 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 			questionLayout.setQuestion(curQuestion);
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 
 
