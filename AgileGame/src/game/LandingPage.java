@@ -7,6 +7,7 @@ import database.QuestionProvider;
 import exception.DuplicatePlayerException;
 import exception.NullPlayerException;
 import exception.NullTeamException;
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -91,11 +92,12 @@ public class LandingPage extends AGPage {
 		continueToGame.setDisable(true);
 		grid.add(continueToGame, 1, 5);
 
-		// Quit Button on Landing Page
-		Button QuitGame = new Button("Quit Game");
-		QuitGame.setAlignment(Pos.CENTER_RIGHT);
-		QuitGame.setDisable(false);
-		grid.add(QuitGame, 2, 5);
+		//Quit Button on Landing Page
+        Button QuitGame =new Button ("Quit Game");
+        QuitGame.setAlignment(Pos.CENTER_RIGHT);
+        QuitGame.setDisable(false);
+        grid.add(QuitGame, 2, 5);
+        QuitGame.setOnAction(e -> QuitGame());
 
 		// Add elements to the gridpane
 		grid.getChildren().addAll(gameTitle);
@@ -198,8 +200,28 @@ public class LandingPage extends AGPage {
             } catch (NullPlayerException | NullTeamException error) { error.printStackTrace(); }
 		});
 	}
+	
+	
+    //Quit Function called
+	private void QuitGame() {
+		Boolean answer = AlertBox.display("Quit Game?","Sure you want to quit?");
+		if(answer==true) {
+			System.out.println("You Quit the Game");
+			Platform.exit();
+			System.exit(0);
+		}
+		else {
+			System.out.println("Continue");
+		}
+	}
 
-    // Method doesn't allow null names, or strings below 0, or above 20 in length
+	//private static void exit() {
+		// TODO Auto-generated method stub
+	//	Platform.exit();
+	//	System.exit(0);
+	//}
+
+	// Method doesn't allow null names, or strings below 0, or above 20 in length
     // Future: Should check if team names are the same
     private boolean verifyTeamName(String name) {
         if (name == null || name.length() <= 0 || name.length() > 20)
@@ -225,8 +247,4 @@ public class LandingPage extends AGPage {
 		return false;
 	}
 
-	private void Quit() {
-		System.out.println("You Quit the Game");
-
-	}
 }
