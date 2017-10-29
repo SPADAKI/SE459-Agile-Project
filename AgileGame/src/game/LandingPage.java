@@ -204,11 +204,11 @@ public class LandingPage extends AGPage {
 	
     //Quit Function called
 	private void QuitGame() {
-		Boolean answer = AlertBox.display("Title of Window","Sure you want to quit?");
+		Boolean answer = AlertBox.display("Quit Game?","Sure you want to quit?");
 		if(answer==true) {
+			System.out.println("You Quit the Game");
 			Platform.exit();
 			System.exit(0);
-		System.out.println("You Quit the Game");
 		}
 		else {
 			System.out.println("Continue");
