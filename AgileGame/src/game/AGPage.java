@@ -14,6 +14,9 @@ public class AGPage {
 		height = h;
 	}
 
+	// Default Constructor Used for testing
+	public AGPage(){}
+
 	public Scene getScene() {
 		return scene;
 	}

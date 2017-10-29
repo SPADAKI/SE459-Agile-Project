@@ -16,12 +16,15 @@ import java.util.List;
 public class GameService {
 
     private static int MIN_REQUIRED_PLAYERS = 1;
+    private static int NUMBER_OF_ROUNDS = 10;
     private Team teamOne;
     private Team teamTwo;
     private HashMap<Team, List<IQuestion>> questions;
     private Game game;
     private static GameService service;
     private boolean activeGame;
+    private boolean teamOneTurn;
+    private boolean teamTwoTurn;
 
     /**
      * GameService factory method
@@ -40,7 +43,7 @@ public class GameService {
      * @throws NullTeamException if either @param team is null
      */
     public void setUp(Team teamOne, Team teamTwo) throws NullTeamException{
-    	
+
         if (teamOne == null || teamTwo == null) {
             activeGame = false;
             throw new NullTeamException("Team does not exist!");
@@ -48,15 +51,34 @@ public class GameService {
         activeGame = true;
         this.teamOne = teamOne;
         this.teamTwo = teamTwo;
+        teamOne.setQuestions(NUMBER_OF_ROUNDS);
+        teamTwo.setQuestions(NUMBER_OF_ROUNDS);
+        teamOneTurn = true;
+        teamTwoTurn = false;
     }
 
     /**
      * Method checks if the game, teams, and players have been set up
      * @return activeGame boolean whether setup has been successful.
      */
-    protected boolean checkSetUp() {
- 
+    protected boolean checkSetUp() throws NullPlayerException, NullTeamException {
         return !(teamOne.getMembers().size() < MIN_REQUIRED_PLAYERS || teamTwo.getMembers().size() < MIN_REQUIRED_PLAYERS) && activeGame;
+    }
+
+    /**
+     * Get Team One Name constructor
+     * @return string of team two name
+     */
+    protected String getTeamOneName() {
+        return teamOne.getTeamName();
+    }
+
+    /**
+     * Get Team Two name constructor
+     * @return string of team two name
+     */
+    protected String getTeamTwoName() {
+        return teamTwo.getTeamName();
     }
 
     /**

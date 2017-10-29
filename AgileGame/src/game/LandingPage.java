@@ -190,37 +190,22 @@ public class LandingPage extends AGPage {
 
 		// Load questions to each team list after continue
 		continueToGame.setOnAction(e -> {
-			if (GameService.getInstance().checkSetUp()) {
-				application.startGame();
-			} else
-				AlertBox.display("Error!", "Game parameters not set up!");
+		    try {
+                if (GameService.getInstance().checkSetUp()) {
+                    application.startGame();
+                } else
+                    AlertBox.display("Error!", "Game parameters not set up!");
+            } catch (NullPlayerException | NullTeamException error) { error.printStackTrace(); }
 		});
 	}
 
-	public static Team getTeamOne() {
-		return teamOne;
-	}
-
-	public static void setTeamOne(Team teamOne) {
-		LandingPage.teamOne = teamOne;
-	}
-
-	public static Team getTeamTwo() {
-		return teamTwo;
-	}
-
-	public static void setTeamTwo(Team teamTwo) {
-		LandingPage.teamTwo = teamTwo;
-	}
-
-	// Method doesn't allow null names, or strings below 0, or above 20 in
-	// length
-	// Future: Should check if team names are the same
-	private boolean verifyTeamName(String name) {
-		if (name == null || name.length() <= 0 || name.length() > 20)
-			return false;
-		return true;
-	}
+    // Method doesn't allow null names, or strings below 0, or above 20 in length
+    // Future: Should check if team names are the same
+    private boolean verifyTeamName(String name) {
+        if (name == null || name.length() <= 0 || name.length() > 20)
+            return false;
+        return true;
+    }
 
 	private boolean checkTeamNames(String one, String two) {
 		return one != null && two != null;
