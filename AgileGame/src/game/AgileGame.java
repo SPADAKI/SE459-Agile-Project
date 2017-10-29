@@ -15,12 +15,14 @@ public class AgileGame extends Application {
 	private AGPage currentPage = null;
 	private LandingPage lanPage = new LandingPage(this, width, height);
 //	private ProgressPage proPage = new ProgressPage(this, width, height);
-	private CongratulationPage conPage = new CongratulationPage(this, width, height);
+//	private CongratulationPage conPage = new CongratulationPage(this, width, height);
 
 	@Override
 	public void start(Stage primaryStage) {
 		window = primaryStage;
 		window.setTitle("Agile Game - Group Six");
+		window.setWidth(width);
+		window.setHeight(height);
 
 		window.widthProperty().addListener((obs, oldVal, newVal) -> {
 			if (newVal.intValue() != width) {
@@ -37,10 +39,16 @@ public class AgileGame extends Application {
 
 		showLandingPage();
 		window.show();
+		window.setResizable(false);
 	}
 
 	public void showLandingPage() {
-		currentPage = lanPage;
+//		currentPage = lanPage;
+//		currentPage.updateSize(width, height);
+//		window.setScene(currentPage.getScene());
+
+		ProgressPage proPage = new ProgressPage(this, width, height);
+		currentPage = proPage;
 		currentPage.updateSize(width, height);
 		window.setScene(currentPage.getScene());
 	}
@@ -53,9 +61,9 @@ public class AgileGame extends Application {
 	}
 
 	public void showCongratulationPopup() {
-		currentPage = conPage;
-		currentPage.updateSize(width, height);
-		window.setScene(currentPage.getScene());
+//		currentPage = conPage;
+//		currentPage.updateSize(width, height);
+//		window.setScene(currentPage.getScene());
 	}
 
 	public int getWidth() {
