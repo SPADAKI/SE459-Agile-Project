@@ -37,12 +37,12 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 		questionLayout = new QuestionLayout(this);
 		cardLayout = new CardLayout();
 		cardLayout.setVisible(false);
-		teamLayout = new TeamLayout();
+		teamLayout = new TeamLayout(GameService.getInstance().getTeamOne(), GameService.getInstance().getTeamTwo());
 		teamLayout.setLayoutY(400);
 
 		pane.getChildren().addAll(questionLayout, cardLayout, teamLayout);
 
-		curQuestion = GameService.getInstance().getNextQuestion();
+		curQuestion = GameService.getInstance().startNewRound();
 		questionLayout.setQuestion(curQuestion);
 
 		scene = new Scene(pane, width, height);
@@ -53,6 +53,8 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		if(idx == curQuestion.getAnswer().getVal()) {
 			// right answer
+			GameService.getInstance().addPointToCurrentTeam(1);
+
 			alert.setTitle("Congratulation");
 			alert.setHeaderText(null);
 			Team team = GameService.getInstance().getCurrentTeam();
@@ -62,18 +64,18 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 			// wrong answer
 			alert.setTitle("Sorry");
 			alert.setHeaderText(null);
-			Team team = GameService.getInstance().getCurrentTeam();
 			alert.setContentText("Your answer is wrong!");
 		}
 		alert.showAndWait();
 		// go to next question
-		curQuestion = GameService.getInstance().getNextQuestion();
+		curQuestion = GameService.getInstance().nextTurn();
 		if(curQuestion == null) {
 			// no more question, game over, go back to the LandingPage
 			application.showLandingPage();
 		}
 		else {
 			questionLayout.setQuestion(curQuestion);
+			teamLayout.refreshData(GameService.getInstance().getCurrentTeamIdx());
 		}
 	}
 

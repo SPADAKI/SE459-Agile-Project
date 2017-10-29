@@ -137,10 +137,11 @@ public class GameService {
     }
 
     // Jason added functions
-    public void startNewRound() {
+    public IQuestion startNewRound() {
     	currentTeamIdx = 0;
         questions = QuestionProvider.getQuestions(20);
         questionIdx = 0;
+        return questions.get(questionIdx++);
     }
 
     public int getCurrentTeamIdx() {
@@ -152,14 +153,17 @@ public class GameService {
     	else return teamTwo;
     }
 
-   public void nextTurn() {
-	   currentTeamIdx = (++currentTeamIdx)%1;
+   public IQuestion nextTurn() {
+	   currentTeamIdx = (++currentTeamIdx)%2;
+
+	   if(questionIdx < questions.size()) return questions.get(questionIdx++);
+	   else return null;
    }
 
-    public IQuestion getNextQuestion() {
-    	if(questionIdx < questions.size()) return questions.get(questionIdx++);
-    	else return null;
-    }
+   public void addPointToCurrentTeam(int point) {
+	   if(currentTeamIdx == 0) teamOne.addPoints(point);
+   		else  teamTwo.addPoints(point);
+   }
 
     /**
      * Resets the service in preparation of a new game
