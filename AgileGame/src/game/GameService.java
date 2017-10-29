@@ -108,6 +108,22 @@ public class GameService {
     }
 
     /**
+     * Get team one.
+     * @return teamOne
+     */
+    public Team getTeamOne() {
+    	return teamOne;
+    }
+
+    /**
+     * Get team one.
+     * @return teamTwo
+     */
+    public Team getTeamTwo() {
+    	return teamTwo;
+    }
+
+    /**
      *
      * @return List of players on Team One
      */
