@@ -4,6 +4,7 @@ import java.util.List;
 
 import database.IQuestion;
 import database.IQuestion.Option;
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -69,7 +70,12 @@ public class QuestionLayout extends Pane {
         pane.getChildren().add(btnNext);
 
         getChildren().add(pane);
-
+     
+        Button QuitGame =new Button ("Quit Game");
+        QuitGame.setAlignment(Pos.CENTER_RIGHT);
+        QuitGame.setDisable(false);
+        pane.add(QuitGame, 2, 0);
+        QuitGame.setOnAction(e -> QuitGame());
 
 //		// Grid setup
 //        BorderPane pane = new BorderPane();
@@ -276,6 +282,18 @@ public class QuestionLayout extends Pane {
 //         getChildren().add(pane);
 	}
 
+	//Quit Function called
+	private void QuitGame() {
+		Boolean answer = AlertBox.display("Quit Game?","Sure you want to quit?");
+		if(answer==true) {
+			System.out.println("You Quit the Game");
+			Platform.exit();
+			System.exit(0);
+		}
+		else {
+			System.out.println("Continue");
+		}
+	}
 	public void setQuestion(IQuestion que) {
 		txtQuestion.setText(que.getQuestion());
 		String[] options = que.getOptions();
