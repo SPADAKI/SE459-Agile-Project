@@ -17,9 +17,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.ImagePattern;
 
 public class LandingPage extends AGPage {
 	private int MAX_NAME_LENGTH = 15;
@@ -110,6 +113,8 @@ public class LandingPage extends AGPage {
 		grid.getChildren().addAll(gameTitle);
 
 		scene = new Scene(grid, width, height);
+		grid.setStyle("-fx-background-image: url(game/background2.png); -fx-background-size: 800 600; -fx-background-repeat: stretch");
+
 
 		// ========================================================================================================
 

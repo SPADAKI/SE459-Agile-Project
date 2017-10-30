@@ -33,6 +33,8 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 		super(app, width, height);
 
 		Pane pane = new Pane();
+		//set background for pane
+		pane.setStyle("-fx-background-image: url(game/background2.png); -fx-background-size: 800 600; -fx-background-repeat: stretch");
 
 		questionLayout = new QuestionLayout(this);
 		cardLayout = new CardLayout();
@@ -86,6 +88,7 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 	public ProgressPage(){
             // Grid setup
             BorderPane pane = new BorderPane();
+
             HBox top = new HBox();
             Pane spacerTop = new Pane();
             Pane spacerBottom = new Pane();
@@ -177,5 +180,6 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 
 
             scene = new Scene(pane, width, height);
+    		
     }
 }

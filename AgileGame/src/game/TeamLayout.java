@@ -21,7 +21,7 @@ public class TeamLayout extends Pane {
 		final int width = 800, height = 200, paddingH = 36, paddingV = 18;
 		// Team one, left
 		Pane leftPane = new Pane();
-
+				
 		Text txtTeamOne = new Text(t1.getTeamName());
 	    txtTeamOne.setStyle("-fx-font: bold 18 arial;");
 	    txtTeamOne.setLayoutX(paddingH+32);
@@ -41,6 +41,7 @@ public class TeamLayout extends Pane {
 	    	label.setWrapText(true);
 	    	label.setLayoutX(paddingH+60*i);
 	    	label.setLayoutY(paddingV+60);
+	    	label.setStyle("-fx-font: bold 14 arial;");
 	    	leftPane.getChildren().add(label);
 	    }
 
@@ -67,6 +68,7 @@ public class TeamLayout extends Pane {
 	    	label.setWrapText(true);
 	    	label.setLayoutX(paddingH+60*i);
 	    	label.setLayoutY(paddingV+60);
+	    	label.setStyle("-fx-font: bold 14 arial;");
 	    	rightPane.getChildren().add(label);
 	    }
 
