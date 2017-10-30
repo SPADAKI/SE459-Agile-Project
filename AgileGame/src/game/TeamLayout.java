@@ -85,7 +85,7 @@ public class TeamLayout extends Pane {
 	    r.setHeight(120);
 	    r.setWidth(764);
 	    
-	    r.setFill(Color.web("rgba(255,255,255,0.5)"));
+	    r.setFill(Color.web("rgba(255,255,255,0.75)"));
         getChildren().addAll(r, leftPane, rightPane, highlight);
 	}
 
