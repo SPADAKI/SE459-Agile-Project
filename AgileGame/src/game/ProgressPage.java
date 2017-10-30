@@ -33,6 +33,8 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 		super(app, width, height);
 
 		Pane pane = new Pane();
+		//set background for pane
+		pane.setStyle("-fx-background-image: url(game/background2.png); -fx-background-size: 800 600; -fx-background-repeat: stretch");
 
 		questionLayout = new QuestionLayout(this);
 		cardLayout = new CardLayout();
@@ -86,6 +88,7 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 	public ProgressPage(){
             // Grid setup
             BorderPane pane = new BorderPane();
+
             HBox top = new HBox();
             Pane spacerTop = new Pane();
             Pane spacerBottom = new Pane();
@@ -126,24 +129,6 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
             botConstraint.setPercentWidth(33);
             cardMiddle.getColumnConstraints().addAll(topConstraint, midConstraint, botConstraint);
 
-//            int height = QuestionCard.getHeight();
-//            int width = QuestionCard.getWidth();
-//
-//            // Question buttons
-//            Button question1 = new Button("5 Points");
-//            question1.setPrefHeight(QuestionCard.getHeight());
-//            question1.setPrefWidth(QuestionCard.getWidth());
-//            cardMiddle.add(question1, 0, 0);
-//
-//            Button question2 = new Button("3 Points");
-//            question2.setPrefHeight(QuestionCard.getHeight());
-//            question2.setPrefWidth(QuestionCard.getWidth());
-//            cardMiddle.add(question2, 1, 0);
-//
-//            Button question3 = new Button("1 Point");
-//            question3.setPrefHeight(QuestionCard.getHeight());
-//            question3.setPrefWidth(QuestionCard.getWidth());
-//            cardMiddle.add(question3, 2, 0);
 
 
         //------------------------------------------------------------------------------------------------------------//
@@ -195,5 +180,6 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 
 
             scene = new Scene(pane, width, height);
+    		
     }
 }
