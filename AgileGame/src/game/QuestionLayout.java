@@ -33,12 +33,14 @@ public class QuestionLayout extends Pane {
 		delegate = del;
 
 		GridPane pane = new GridPane();
+		pane.setPadding(new Insets(56, 100, 0, 100));
+		pane.setVgap(12);
 
         //set location to column=0 row=1, columnSpan, rowSpan
 		txtQuestion = new Text("txtQuestion");
         GridPane.setConstraints(txtQuestion, 0, 1);
         txtQuestion.setStyle("-fx-font: bold 14 arial;");
-        txtQuestion.setWrappingWidth(800);
+        txtQuestion.setWrappingWidth(600);
         pane.getChildren().add(txtQuestion);
 
         buttons = new Button[4];
