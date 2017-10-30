@@ -15,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -86,17 +88,22 @@ public class LandingPage extends AGPage {
 
 		teamTwo = new Team(teamTwoNameInput.getText());
 
-		// Continue to Progress Page Button
-		Button continueToGame = new Button("Start Game");
+		// Continue to Progress Page Button, add image to start button		
+		Image imageStart = new Image("game/startButton.png", 80, 30, false, false);		
+		Button continueToGame = new Button("", new ImageView(imageStart));
 		continueToGame.setAlignment(Pos.CENTER_RIGHT);
 		continueToGame.setDisable(true);
-		grid.add(continueToGame, 1, 5);
+		grid.add(continueToGame, 1, 10);
 
-		//Quit Button on Landing Page
-        Button QuitGame =new Button ("Quit Game");
-        QuitGame.setAlignment(Pos.CENTER_RIGHT);
+		//Quit Button on Landing Page, style with png
+		Image imageQuit = new Image("game/quitButton.png", 80, 30, false, false);		
+		Button QuitGame = new Button("", new ImageView(imageQuit));		
+//        Button QuitGame =new Button ("Quit Game");
+        
+        GridPane.setHalignment(QuitGame, HPos.RIGHT);
+        
         QuitGame.setDisable(false);
-        grid.add(QuitGame, 2, 0);
+        grid.add(QuitGame, 1, 10);
         QuitGame.setOnAction(e -> QuitGame());
 
 		// Add elements to the gridpane

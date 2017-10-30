@@ -58,8 +58,10 @@ public class QuestionLayout extends Pane {
             });
         }
 
-
+        //set next button to right alignment 
         btnNext = new Button("Next");
+        btnNext.setAlignment(Pos.CENTER_RIGHT);
+        GridPane.setHalignment(btnNext, HPos.RIGHT);
         btnNext.setOnAction(e -> {
         	// Should select an answer first
         	if(selectedIdx != -1) {

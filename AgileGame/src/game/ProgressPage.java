@@ -126,24 +126,6 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
             botConstraint.setPercentWidth(33);
             cardMiddle.getColumnConstraints().addAll(topConstraint, midConstraint, botConstraint);
 
-//            int height = QuestionCard.getHeight();
-//            int width = QuestionCard.getWidth();
-//
-//            // Question buttons
-//            Button question1 = new Button("5 Points");
-//            question1.setPrefHeight(QuestionCard.getHeight());
-//            question1.setPrefWidth(QuestionCard.getWidth());
-//            cardMiddle.add(question1, 0, 0);
-//
-//            Button question2 = new Button("3 Points");
-//            question2.setPrefHeight(QuestionCard.getHeight());
-//            question2.setPrefWidth(QuestionCard.getWidth());
-//            cardMiddle.add(question2, 1, 0);
-//
-//            Button question3 = new Button("1 Point");
-//            question3.setPrefHeight(QuestionCard.getHeight());
-//            question3.setPrefWidth(QuestionCard.getWidth());
-//            cardMiddle.add(question3, 2, 0);
 
 
         //------------------------------------------------------------------------------------------------------------//
