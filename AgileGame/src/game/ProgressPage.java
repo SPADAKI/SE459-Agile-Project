@@ -55,10 +55,10 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 			// right answer
 			GameService.getInstance().addPointToCurrentTeam(1);
 
-			alert.setTitle("Congratulation");
+			alert.setTitle("Congratulations");
 			alert.setHeaderText(null);
 			Team team = GameService.getInstance().getCurrentTeam();
-			alert.setContentText("Your answer is right!" + team.getTeamName() + " get 1 point!");
+			alert.setContentText("Your answer is right!, " + team.getTeamName() + " gets 1 point!");
 		}
 		else {
 			// wrong answer
