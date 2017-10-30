@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -19,9 +20,9 @@ public class TeamLayout extends Pane {
 		team1 = t1;
 		team2 = t2;
 		final int width = 800, height = 200, paddingH = 36, paddingV = 18;
+
 		// Team one, left
 		Pane leftPane = new Pane();
-				
 		Text txtTeamOne = new Text(t1.getTeamName());
 	    txtTeamOne.setStyle("-fx-font: bold 18 arial;");
 	    txtTeamOne.setLayoutX(paddingH+32);
@@ -71,14 +72,21 @@ public class TeamLayout extends Pane {
 	    	label.setStyle("-fx-font: bold 14 arial;");
 	    	rightPane.getChildren().add(label);
 	    }
-
+	    
 	    highlight = new Circle();
 	    highlight.setCenterX(50);
 	    highlight.setCenterY(14);
 	    highlight.setRadius(4.0f);
 	    highlight.setFill(Color.BLUE);
-
-        getChildren().addAll(leftPane, rightPane, highlight);
+	     	
+	    Rectangle r = new Rectangle();
+	    r.setX(paddingV);
+	    r.setY(paddingH);
+	    r.setHeight(120);
+	    r.setWidth(764);
+	    
+	    r.setFill(Color.web("rgba(255,255,255,0.5)"));
+        getChildren().addAll(r, leftPane, rightPane, highlight);
 	}
 
 	public void refreshData(int curTeamIdx) {
