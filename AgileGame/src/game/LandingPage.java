@@ -31,7 +31,7 @@ public class LandingPage extends AGPage {
 	private int maxPlayers = 5;
 	private int numPlayerTeamOne;
 	private int numPlayerTeamTwo;
-	private Team teamOne, teamTwo;
+	private Team teamOne = new Team(""), teamTwo = new Team("");
 
 	public LandingPage(AgileGame app, int width, int height) {
 		super(app, width, height);
@@ -91,20 +91,20 @@ public class LandingPage extends AGPage {
 
 		teamTwo = new Team(teamTwoNameInput.getText());
 
-		// Continue to Progress Page Button, add image to start button		
-		Image imageStart = new Image("game/startButton.png", 80, 30, false, false);		
+		// Continue to Progress Page Button, add image to start button
+		Image imageStart = new Image("game/startButton.png", 80, 30, false, false);
 		Button continueToGame = new Button("", new ImageView(imageStart));
 		continueToGame.setAlignment(Pos.CENTER_RIGHT);
 		continueToGame.setDisable(true);
 		grid.add(continueToGame, 1, 10);
 
 		//Quit Button on Landing Page, style with png
-		Image imageQuit = new Image("game/quitButton.png", 80, 30, false, false);		
-		Button QuitGame = new Button("", new ImageView(imageQuit));		
+		Image imageQuit = new Image("game/quitButton.png", 80, 30, false, false);
+		Button QuitGame = new Button("", new ImageView(imageQuit));
 //        Button QuitGame =new Button ("Quit Game");
-        
+
         GridPane.setHalignment(QuitGame, HPos.RIGHT);
-        
+
         QuitGame.setDisable(false);
         grid.add(QuitGame, 1, 10);
         QuitGame.setOnAction(e -> QuitGame());
@@ -122,7 +122,7 @@ public class LandingPage extends AGPage {
 
 			// set team name to static, easy to retrieve, and cleaner without
 			// Exception
-			teamOne = new Team(teamOneNameInput.getText());
+			teamOne.setTeamName(teamOneNameInput.getText());
 			System.out.println("Set Team1 name to: " + teamOne.getTeamName());
 			if (!verifyTeamName(teamOne.getTeamName()))
 				AlertBox.display("Error!", "Invalid Name. Try Again.");
@@ -139,8 +139,7 @@ public class LandingPage extends AGPage {
 		});
 
 		submitTeamTwoName.setOnAction(e -> {
-
-			teamTwo = new Team(teamTwoNameInput.getText());
+			teamTwo.setTeamName(teamTwoNameInput.getText());
 			System.out.println("Set Team2 name to: " + teamTwo.getTeamName());
 			if (!verifyTeamName(teamTwo.getTeamName()))
 				AlertBox.display("Error!", "Invalid Name. Try Again.");
@@ -200,12 +199,7 @@ public class LandingPage extends AGPage {
 
 		// Load questions to each team list after continue
 		continueToGame.setOnAction(e -> {
-		    try {
-                if (GameService.getInstance().checkSetUp()) {
-                    application.startGame();
-                } else
-                    AlertBox.display("Error!", "Game parameters not set up!");
-            } catch (NullPlayerException | NullTeamException error) { error.printStackTrace(); }
+			application.startGame();
 		});
 	}
 

@@ -44,12 +44,6 @@ public class GameService {
      * @throws NullTeamException if either @param team is null
      */
     public void setUp(Team teamOne, Team teamTwo) throws NullTeamException{
-
-        if (teamOne == null || teamTwo == null) {
-            activeGame = false;
-            throw new NullTeamException("Team does not exist!");
-        }
-        activeGame = true;
         this.teamOne = teamOne;
         this.teamTwo = teamTwo;
     }
@@ -138,8 +132,10 @@ public class GameService {
 
     // Jason added functions
     public IQuestion startNewRound() {
+    	teamOne.clearScore();
+    	teamTwo.clearScore();
     	currentTeamIdx = 0;
-        questions = QuestionProvider.getQuestions(20);
+        questions = QuestionProvider.getQuestions(2);
         questionIdx = 0;
         return questions.get(questionIdx++);
     }

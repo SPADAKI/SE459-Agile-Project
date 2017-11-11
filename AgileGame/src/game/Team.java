@@ -33,6 +33,10 @@ public class Team {
 		return score;
 	}
 
+	public void clearScore() {
+		score = 0;
+	}
+
 	public void addPoints(int points) {
 		score += points;
 	}
