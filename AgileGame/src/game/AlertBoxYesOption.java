@@ -9,7 +9,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-public class AlertBox {
+public class AlertBoxYesOption {
         static boolean answer;
     public static Boolean display(String title, String message) {
         Stage window = new Stage();

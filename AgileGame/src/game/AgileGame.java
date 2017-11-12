@@ -14,13 +14,11 @@ public class AgileGame extends Application {
 
 	private AGPage currentPage = null;
 	private LandingPage lanPage = new LandingPage(this, width, height);
-//	private ProgressPage proPage = new ProgressPage(this, width, height);
-//	private CongratulationPage conPage = new CongratulationPage(this, width, height);
 
 	@Override
 	public void start(Stage primaryStage) {
 		window = primaryStage;
-		window.setTitle("Agile Game - Group Six");
+		window.setTitle("Agile World! - Group 6 Project");
 		window.setWidth(width);
 		window.setHeight(height);
 
@@ -56,9 +54,7 @@ public class AgileGame extends Application {
 	}
 
 	public void showCongratulationPopup() {
-//		currentPage = conPage;
-//		currentPage.updateSize(width, height);
-//		window.setScene(currentPage.getScene());
+
 	}
 
 	public int getWidth() {

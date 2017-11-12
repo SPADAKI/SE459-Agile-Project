@@ -97,9 +97,6 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 		}
 	}
 
-
-
-
 	// For testing
 	public ProgressPage(){
             // Grid setup

@@ -1,5 +1,6 @@
 package game;
 
+import java.io.InputStream;
 import java.util.List;
 
 import database.IQuestion;
@@ -11,6 +12,7 @@ import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -42,29 +44,39 @@ public class LandingPage extends AGPage {
 
 		// Grid setup
 		GridPane grid = new GridPane();
-		grid.setPadding(new Insets(10, 10, 10, 10));
+		grid.setPadding(new Insets(10, 15, 10, 15));
 		// Column setup
 		ColumnConstraints leftContraint = new ColumnConstraints();
-		leftContraint.setPercentWidth(25);
+		leftContraint.setPercentWidth(28);
 		ColumnConstraints midConstraint = new ColumnConstraints();
-		midConstraint.setPercentWidth(50);
+		midConstraint.setPercentWidth(44);
 		ColumnConstraints rightContraint = new ColumnConstraints();
-		rightContraint.setPercentWidth(25);
+		rightContraint.setPercentWidth(28);
+		
 		// Row setup
-		for (int i = 0; i < 10; i++) {
+		RowConstraints row1 = new RowConstraints(50);
+		grid.getRowConstraints().add(row1);
+		for (int i = 1; i < 10; i++) {
 			RowConstraints row = new RowConstraints(30);
 			grid.getRowConstraints().add(row);
 		}
 		grid.getColumnConstraints().addAll(leftContraint, midConstraint, rightContraint);
 
 		// Set vertical and horizontal gap
-		grid.setVgap(10);
+		grid.setVgap(15);
 		grid.setHgap(10);
 
-		Label gameTitle = new Label("Team Six Agile Game");
+		Label gameTitle = new Label("Welcome to the Agile World!");
+		gameTitle.setStyle("-fx-font: bold 20 arial; -fx-font-family: 'Comic Sans MS';");
 		GridPane.setHalignment(gameTitle, HPos.CENTER);
 		GridPane.setConstraints(gameTitle, 1, 0);
-
+		
+		Label gameTitleSub = new Label("Let's start the adventure!");
+		gameTitleSub.setStyle("-fx-font: 16 arial; -fx-font-family: 'Comic Sans MS';");
+		GridPane.setHalignment(gameTitleSub, HPos.CENTER);
+		GridPane.setValignment(gameTitleSub, VPos.TOP);
+		GridPane.setConstraints(gameTitleSub, 1, 1);
+		
 		// Team One Name Input fields
 		TextField teamOneNameInput = new TextField();
 		teamOneNameInput.setPromptText("Team One Name");
@@ -101,7 +113,6 @@ public class LandingPage extends AGPage {
 		//Quit Button on Landing Page, style with png
 		Image imageQuit = new Image("game/quitButton.png", 80, 30, false, false);
 		Button QuitGame = new Button("", new ImageView(imageQuit));
-//        Button QuitGame =new Button ("Quit Game");
 
         GridPane.setHalignment(QuitGame, HPos.RIGHT);
 
@@ -110,7 +121,7 @@ public class LandingPage extends AGPage {
         QuitGame.setOnAction(e -> QuitGame());
 
 		// Add elements to the gridpane
-		grid.getChildren().addAll(gameTitle);
+		grid.getChildren().addAll(gameTitle, gameTitleSub);
 
 		scene = new Scene(grid, width, height);
 		grid.setStyle("-fx-background-image: url(game/background2.png); -fx-background-size: 800 600; -fx-background-repeat: stretch");
@@ -125,9 +136,9 @@ public class LandingPage extends AGPage {
 			teamOne.setTeamName(teamOneNameInput.getText());
 			System.out.println("Set Team1 name to: " + teamOne.getTeamName());
 			if (!verifyTeamName(teamOne.getTeamName()))
-				AlertBox.display("Error!", "Invalid Name. Try Again.");
+				AlertBoxYesOption.display("Error!", "Invalid Name. Try Again.");
 			else {
-				AlertBox.display("Success",
+				AlertBoxYesOption.display("Success",
 						String.format("Team Name '%s' successfully created.", teamOne.getTeamName()));
 				if (checkTeamNames(teamOne.getTeamName(), teamTwo.getTeamName()))
 					continueToGame.setDisable(false);
@@ -142,9 +153,9 @@ public class LandingPage extends AGPage {
 			teamTwo.setTeamName(teamTwoNameInput.getText());
 			System.out.println("Set Team2 name to: " + teamTwo.getTeamName());
 			if (!verifyTeamName(teamTwo.getTeamName()))
-				AlertBox.display("Error!", "Invalid Name. Try Again.");
+				AlertBoxYesOption.display("Error!", "Invalid Name. Try Again.");
 			else {
-				AlertBox.display("Success",
+				AlertBoxYesOption.display("Success",
 						String.format("Team Name '%s' successfully created.", teamTwo.getTeamName()));
 				if (checkTeamNames(teamOne.getTeamName(), teamTwo.getTeamName()))
 					continueToGame.setDisable(false);
@@ -162,7 +173,7 @@ public class LandingPage extends AGPage {
 			boolean x = checkTeamOnePlayerName(name);
 			try {
 				if (numPlayerTeamOne == maxPlayers)
-					AlertBox.display("Error!", "Max Number of Players reached.");
+					AlertBoxYesOption.display("Error!", "Max Number of Players reached.");
 				else if (x) {
 					GameService.getInstance().addPlayerTeamOne(new Player(name));
 					grid.add(new Label(name), 0, numPlayerTeamOne + 3);
@@ -170,9 +181,9 @@ public class LandingPage extends AGPage {
 					GridPane.setConstraints(submitPlayerTeamOne, 0, numPlayerTeamOne + 5);
 					numPlayerTeamOne += 1;
 				} else
-					AlertBox.display("Error!", "Invalid Name. Try Again.");
+					AlertBoxYesOption.display("Error!", "Invalid Name. Try Again.");
 			} catch (NullPlayerException | DuplicatePlayerException | NullTeamException error) {
-				AlertBox.display("Error!", error.getMessage());
+				AlertBoxYesOption.display("Error!", error.getMessage());
 			}
 			addPlayerTeamOne.clear();
 		});
@@ -182,7 +193,7 @@ public class LandingPage extends AGPage {
 			boolean x = checkTeamTwoPlayerName(name);
 			try {
 				if (numPlayerTeamTwo == maxPlayers)
-					AlertBox.display("Error!", "Max Number of Players reached.");
+					AlertBoxYesOption.display("Error!", "Max Number of Players reached.");
 				else if (x) {
 					GameService.getInstance().addPlayerTeamTwo(new Player(name));
 					grid.add(new Label(name), 2, numPlayerTeamTwo + 3);
@@ -190,9 +201,9 @@ public class LandingPage extends AGPage {
 					GridPane.setConstraints(submitPlayerTeamTwo, 2, numPlayerTeamTwo + 5);
 					numPlayerTeamTwo += 1;
 				} else
-					AlertBox.display("Error!", "Invalid Name. Try Again.");
+					AlertBoxYesOption.display("Error!", "Invalid Name. Try Again.");
 			} catch (NullPlayerException | DuplicatePlayerException | NullTeamException error) {
-				AlertBox.display("Error!", error.getMessage());
+				AlertBoxYesOption.display("Error!", error.getMessage());
 			}
 			addPlayerTeamTwo.clear();
 		});
@@ -206,7 +217,7 @@ public class LandingPage extends AGPage {
 
     //Quit Function called
 	private void QuitGame() {
-		Boolean answer = AlertBox.display("Quit Game?","Sure you want to quit?");
+		Boolean answer = AlertBoxNoOption.display("Quit Game?","Sure you want to quit?");
 		if(answer==true) {
 			System.out.println("You Quit the Game");
 			Platform.exit();
