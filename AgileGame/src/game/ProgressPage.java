@@ -42,7 +42,7 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 		cardLayout = new CardLayout();
 		cardLayout.setVisible(false);
 		teamLayout = new TeamLayout(GameService.getInstance().getTeamOne(), GameService.getInstance().getTeamTwo());
-		teamLayout.setLayoutY(400);
+		teamLayout.setLayoutY(430);
 
 		pane.getChildren().addAll(questionLayout, cardLayout, teamLayout);
 
@@ -61,7 +61,7 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 			alert.setTitle("Congratulations");
 			alert.setHeaderText(null);
 			Team team = GameService.getInstance().getCurrentTeam();
-			alert.setContentText("Your answer is right!, " + team.getTeamName() + " gets 1 point!");
+			alert.setContentText("Your answer is right!, Team " + team.getTeamName() + " gets 1 point!");
 		}
 		else {
 			// wrong answer
@@ -75,7 +75,7 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 		if(curQuestion == null) {
 			// no more question, game over, go back to the LandingPage
 			Alert resultAlert = new Alert(AlertType.INFORMATION);
-			resultAlert.setTitle("Congratulations");
+			resultAlert.setTitle("Congratulations!");
 			resultAlert.setHeaderText(null);
 			int s1 = GameService.getInstance().getTeamOne().getScore();
 			int s2 = GameService.getInstance().getTeamTwo().getScore();
@@ -83,10 +83,10 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 				resultAlert.setContentText("Both of the teams win the game!");
 			}
 			else if(s1 > s2) {// team1 win
-				resultAlert.setContentText(GameService.getInstance().getTeamOne().getTeamName() + " win the game!");
+				resultAlert.setContentText("Team " + GameService.getInstance().getTeamOne().getTeamName() + " win the game!");
 			}
 			else {// team2 win
-				resultAlert.setContentText(GameService.getInstance().getTeamTwo().getTeamName() + " win the game!");
+				resultAlert.setContentText("Team " + GameService.getInstance().getTeamTwo().getTeamName() + " win the game!");
 			}
 			resultAlert.showAndWait();
 			application.showLandingPage();

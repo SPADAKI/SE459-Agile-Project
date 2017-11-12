@@ -34,7 +34,7 @@ public class QuestionLayout extends Pane {
 		delegate = del;
 
 		GridPane pane = new GridPane();
-		pane.setPadding(new Insets(56, 100, 0, 100));
+		pane.setPadding(new Insets(20, 100, 0, 100));
 		pane.setVgap(12);
 
         //set location to column=0 row=1, columnSpan, rowSpan
