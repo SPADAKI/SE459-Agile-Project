@@ -24,14 +24,13 @@ public class TeamTest {
 
 	@Test
 	public void testTeam() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
 	public void testSetTeamName() {
 		t1.setTeamName("change");
 		assertEquals(t1.getTeamName(),"change");
-		fail("Not yet implemented");
 	}
 
 	@Test
@@ -50,21 +49,20 @@ public class TeamTest {
 		t1.addPoints(5);
 		t1.clearScore();
 		assertEquals(t1.getScore(),0);
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
 	public void testAddPoints() {
 		t1.addPoints(5);
 		assertEquals(t1.getScore(),5);
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
 	public void testAddMember() throws DuplicatePlayerException, NullPlayerException {
 		Player pp = new Player("pp");
 		t1.addMember(pp);
-		fail("Not yet implemented");
 	}
 
 }
