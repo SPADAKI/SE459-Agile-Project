@@ -1,10 +1,10 @@
-package game;
+package UnitTest;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class AgileGameTest {
+public class ClassTest {
 
 	@Test
 	public void test() {

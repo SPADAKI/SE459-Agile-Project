@@ -9,7 +9,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-public class AlertBox {
+public class AlertBoxYesOption {
         static boolean answer;
     public static Boolean display(String title, String message) {
         Stage window = new Stage();
@@ -32,7 +32,7 @@ public class AlertBox {
         });
         
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(label, yesButton,noButton);
+        layout.getChildren().addAll(label, yesButton);
         layout.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout, 400, 200);
         window.setScene(scene);

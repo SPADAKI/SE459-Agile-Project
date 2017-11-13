@@ -32,6 +32,8 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 	public ProgressPage(AgileGame app, int width, int height) {
 		super(app, width, height);
 
+		curQuestion = GameService.getInstance().startNewRound();
+
 		Pane pane = new Pane();
 		//set background for pane
 		pane.setStyle("-fx-background-image: url(game/background2.png); -fx-background-size: 800 600; -fx-background-repeat: stretch");
@@ -40,11 +42,10 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 		cardLayout = new CardLayout();
 		cardLayout.setVisible(false);
 		teamLayout = new TeamLayout(GameService.getInstance().getTeamOne(), GameService.getInstance().getTeamTwo());
-		teamLayout.setLayoutY(400);
+		teamLayout.setLayoutY(430);
 
 		pane.getChildren().addAll(questionLayout, cardLayout, teamLayout);
 
-		curQuestion = GameService.getInstance().startNewRound();
 		questionLayout.setQuestion(curQuestion);
 
 		scene = new Scene(pane, width, height);
@@ -60,7 +61,7 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 			alert.setTitle("Congratulations");
 			alert.setHeaderText(null);
 			Team team = GameService.getInstance().getCurrentTeam();
-			alert.setContentText("Your answer is right!, " + team.getTeamName() + " gets 1 point!");
+			alert.setContentText("Your answer is right!, Team " + team.getTeamName() + " gets 1 point!");
 		}
 		else {
 			// wrong answer
@@ -73,6 +74,21 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 		curQuestion = GameService.getInstance().nextTurn();
 		if(curQuestion == null) {
 			// no more question, game over, go back to the LandingPage
+			Alert resultAlert = new Alert(AlertType.INFORMATION);
+			resultAlert.setTitle("Congratulations!");
+			resultAlert.setHeaderText(null);
+			int s1 = GameService.getInstance().getTeamOne().getScore();
+			int s2 = GameService.getInstance().getTeamTwo().getScore();
+			if(s1 == s2) {// draw
+				resultAlert.setContentText("Both of the teams win the game!");
+			}
+			else if(s1 > s2) {// team1 win
+				resultAlert.setContentText("Team " + GameService.getInstance().getTeamOne().getTeamName() + " win the game!");
+			}
+			else {// team2 win
+				resultAlert.setContentText("Team " + GameService.getInstance().getTeamTwo().getTeamName() + " win the game!");
+			}
+			resultAlert.showAndWait();
 			application.showLandingPage();
 		}
 		else {
@@ -80,9 +96,6 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 			teamLayout.refreshData(GameService.getInstance().getCurrentTeamIdx());
 		}
 	}
-
-
-
 
 	// For testing
 	public ProgressPage(){
@@ -180,6 +193,6 @@ public class ProgressPage extends AGPage implements QuestionLayoutDelegate {
 
 
             scene = new Scene(pane, width, height);
-    		
+
     }
 }
